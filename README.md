@@ -1,33 +1,207 @@
-# Quranic Quest Mobile App UI Mockups
+# Quranic Quest
 
-This directory contains UI mockups for the Quranic Quest mobile application, an AI-driven Quran learning app designed specifically for Muslim immigrant families in Western countries.
+![Quranic Quest](docs/images/logo.png)
 
-## Mockup Structure
+An AI-driven Quran learning platform designed specifically for Muslim immigrant families in Western countries. The platform combines traditional teaching methods with cutting-edge AI technology to create an engaging and effective learning experience.
 
-The mockups are organized by user flow and feature category:
+## 🌟 Features
 
-- **Authentication**: Login, signup, and onboarding screens
-- **Dashboard**: Main app dashboard and progress tracking
-- **Learning**: Lesson interfaces, pronunciation practice, and interactive content
-- **Profile**: User profile and preference management
-- **Family**: Family account management and parent oversight features
+- **AI-Powered Pronunciation Feedback**: Real-time feedback on Quranic recitation using advanced speech recognition
+- **Personalized Learning Paths**: Adaptive curriculum that adjusts to each child's learning pace
+- **Interactive Voice Conversations**: Natural conversations for practice and guidance
+- **Progress Tracking & Analytics**: Detailed insights into learning journey
+- **Family Involvement Tools**: Features for parents to participate regardless of Arabic proficiency
+- **Cultural Context Integration**: Content designed for Muslim families in Western countries
 
-## Design System
+## 🏗️ Project Structure
 
-The mockups follow a consistent design system with:
+```
+quran-quest/
+├── website/                 # React website
+│   ├── src/
+│   │   ├── components/     # React components
+│   │   ├── pages/         # Page components
+│   │   ├── styles/        # CSS and style files
+│   │   └── utils/         # Utility functions
+│   └── public/            # Static assets
+├── mobile/                 # React Native mobile app
+│   ├── src/
+│   │   ├── components/    # React Native components
+│   │   ├── screens/       # Screen components
+│   │   ├── navigation/    # Navigation configuration
+│   │   └── utils/         # Utility functions
+│   ├── ios/               # iOS specific code
+│   └── android/           # Android specific code
+├── backend/               # Backend services
+│   ├── src/
+│   │   ├── api/          # API endpoints
+│   │   ├── models/       # Data models
+│   │   ├── services/     # Business logic
+│   │   └── utils/        # Utility functions
+│   └── tests/            # Backend tests
+└── docs/                 # Documentation
+```
 
-- **Color Palette**: Modern purple/blue primary colors (#5D5FEF) with blue accent colors (#00C2FF)
-- **Typography**: Clean, readable fonts optimized for both Arabic and Latin scripts
-- **Components**: Reusable UI components that will translate to the React Native implementation
-- **Iconography**: Consistent icon style throughout the application
+## 🚀 Getting Started
 
-## Key User Flows
+### Prerequisites
 
-1. **Onboarding Flow**: Initial user setup and assessment
-2. **Daily Learning Flow**: Regular lesson and practice sessions
-3. **Progress Review Flow**: Tracking achievements and improvements
-4. **Family Management Flow**: Parent-child account interactions
+- Node.js (v18 or higher)
+- npm or yarn
+- React Native development environment
+- Python 3.8+ (for backend)
 
-## Implementation Notes
+### Website Development
 
-These mockups will serve as the foundation for the React Native implementation, with the AI components being developed in Python using API calls to LLMs (OpenAI, Gemini, Anthropic models).
+```bash
+cd website
+npm install
+npm start
+```
+
+The website will be available at http://localhost:3000
+
+### Mobile App Development
+
+```bash
+cd mobile
+npm install
+# For iOS
+cd ios && pod install && cd ..
+npx react-native run-ios
+# For Android
+npx react-native run-android
+```
+
+### Backend Development
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py runserver
+```
+
+## 🧪 Testing
+
+### Website
+
+```bash
+cd website
+npm test
+```
+
+### Mobile App
+
+```bash
+cd mobile
+npm test
+```
+
+### Backend
+
+```bash
+cd backend
+python -m pytest
+```
+
+## 📱 Supported Platforms
+
+- Web: Chrome, Firefox, Safari, Edge (latest versions)
+- iOS: iOS 13+
+- Android: Android 6.0 (API 23)+
+
+## 🔒 Security
+
+- End-to-end encryption for user data
+- GDPR compliant
+- Regular security audits
+- Secure authentication using JWT
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and development process.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## 📞 Support
+
+- Website: [quranquest.com](https://quranquest.com)
+- Email: support@quranquest.com
+- Twitter: [@QuranQuest](https://twitter.com/QuranQuest)
+
+## 🙏 Acknowledgments
+
+- OpenAI for AI capabilities
+- React Native community
+- Our beta testers and early adopters
+- The Muslim community for their valuable feedback
+
+## 📊 Project Status
+
+- Website: Beta
+- Mobile App: In Development
+- Backend: In Development
+
+## 🗺️ Roadmap
+
+### Phase 1 (Q2 2024)
+- Launch beta website
+- Basic mobile app functionality
+- Core AI features
+
+### Phase 2 (Q3 2024)
+- Advanced pronunciation feedback
+- Family management features
+- Enhanced progress tracking
+
+### Phase 3 (Q4 2024)
+- Community features
+- Advanced AI interactions
+- Multi-language support
+
+## 💡 Technical Stack
+
+### Frontend (Website)
+- React
+- TypeScript
+- Tailwind CSS
+- Redux
+
+### Mobile App
+- React Native
+- TypeScript
+- Redux
+- Native Modules
+
+### Backend
+- Python
+- FastAPI
+- PostgreSQL
+- Redis
+- Docker
+
+### AI/ML
+- TensorFlow
+- PyTorch
+- OpenAI API
+- Custom ML models
+
+## 🌐 API Documentation
+
+API documentation is available at [api-docs.quranquest.com](https://api-docs.quranquest.com)
+
+## 🔄 Version History
+
+- v0.1.0 - Initial beta release
+- v0.2.0 - Added core AI features
+- v0.3.0 - Enhanced mobile app functionality
