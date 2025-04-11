@@ -1,6 +1,6 @@
 # Quranic Quest
 
-![Quranic Quest](docs/images/logo.png)
+![Quranic Quest](assets/images/logo.svg)
 
 An AI-driven Quran learning platform designed specifically for Muslim immigrant families in Western countries. The platform combines traditional teaching methods with cutting-edge AI technology to create an engaging and effective learning experience.
 

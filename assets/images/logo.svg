@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background circle -->
+    <circle cx="100" cy="100" r="90" fill="#2C3E50"/>
+    
+    <!-- Book shape -->
+    <rect x="60" y="50" width="80" height="100" rx="5" fill="#E74C3C"/>
+    
+    <!-- Decorative elements -->
+    <path d="M70 70 L130 70 M70 90 L130 90 M70 110 L130 110" 
+          stroke="white" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Crescent moon -->
+    <path d="M140 50 A20 20 0 0 1 140 90 A20 20 0 0 1 140 50" 
+          fill="white" transform="rotate(-30 140 70)"/>
+    
+    <!-- Star -->
+    <path d="M140 30 L145 40 L155 40 L147 47 L150 57 L140 52 L130 57 L133 47 L125 40 L135 40 Z" 
+          fill="white"/>
+</svg> 
