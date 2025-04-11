@@ -1,0 +1,200 @@
+// Dashboard Screen: Main App Dashboard
+{
+  "screen": "Dashboard",
+  "elements": {
+    "header": {
+      "type": "container",
+      "position": "top",
+      "style": "header-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "heading-2",
+          "content": "Assalamu Alaikum, [Name]"
+        },
+        {
+          "type": "avatar",
+          "style": "small-circle",
+          "action": "navigate-to-profile"
+        }
+      ]
+    },
+    "streakCounter": {
+      "type": "container",
+      "position": "below-header",
+      "style": "streak-container",
+      "content": [
+        {
+          "type": "icon",
+          "style": "flame-icon",
+          "content": "streak-flame"
+        },
+        {
+          "type": "text",
+          "style": "heading-3",
+          "content": "14 Day Streak"
+        }
+      ]
+    },
+    "dailyGoalProgress": {
+      "type": "progress-bar",
+      "position": "below-streak",
+      "style": "primary-progress",
+      "content": {
+        "progress": 75,
+        "label": "Today's Goal: 15 minutes",
+        "sublabel": "11 minutes completed"
+      }
+    },
+    "todaysLessonCard": {
+      "type": "card",
+      "position": "middle",
+      "style": "feature-card",
+      "content": {
+        "icon": "book-icon",
+        "title": "Continue Your Lesson",
+        "description": "Surah Al-Fatiha: Verse 3",
+        "progress": 60,
+        "button": {
+          "text": "Continue",
+          "action": "navigate-to-current-lesson"
+        }
+      }
+    },
+    "practiceSessionCard": {
+      "type": "card",
+      "position": "below-lesson",
+      "style": "feature-card",
+      "content": {
+        "icon": "microphone-icon",
+        "title": "Practice Pronunciation",
+        "description": "10-minute interactive session",
+        "button": {
+          "text": "Start Practice",
+          "action": "navigate-to-practice"
+        }
+      }
+    },
+    "achievementsSection": {
+      "type": "container",
+      "position": "below-practice",
+      "style": "section-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header",
+          "content": "Recent Achievements"
+        },
+        {
+          "type": "horizontal-scroll",
+          "style": "achievements-scroll",
+          "content": [
+            {
+              "type": "achievement-badge",
+              "content": {
+                "icon": "star-icon",
+                "title": "Perfect Pronunciation",
+                "description": "Mastered 5 letters"
+              }
+            },
+            {
+              "type": "achievement-badge",
+              "content": {
+                "icon": "calendar-icon",
+                "title": "7-Day Streak",
+                "description": "Practiced every day"
+              }
+            },
+            {
+              "type": "achievement-badge",
+              "content": {
+                "icon": "book-icon",
+                "title": "First Surah",
+                "description": "Completed Al-Fatiha"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "familyProgressSection": {
+      "type": "container",
+      "position": "below-achievements",
+      "style": "section-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header",
+          "content": "Family Progress"
+        },
+        {
+          "type": "vertical-list",
+          "style": "family-list",
+          "content": [
+            {
+              "type": "family-member-item",
+              "content": {
+                "avatar": "avatar1",
+                "name": "Ahmed",
+                "progress": 85,
+                "streak": 14
+              }
+            },
+            {
+              "type": "family-member-item",
+              "content": {
+                "avatar": "avatar2",
+                "name": "Fatima",
+                "progress": 62,
+                "streak": 8
+              }
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "style": "text-button",
+          "content": "View Family Dashboard",
+          "action": "navigate-to-family-dashboard"
+        }
+      ]
+    },
+    "navigationBar": {
+      "type": "tab-bar",
+      "position": "bottom",
+      "style": "primary-tabs",
+      "content": [
+        {
+          "icon": "home-icon",
+          "label": "Home",
+          "action": "navigate-to-dashboard",
+          "active": true
+        },
+        {
+          "icon": "book-icon",
+          "label": "Lessons",
+          "action": "navigate-to-lessons"
+        },
+        {
+          "icon": "microphone-icon",
+          "label": "Practice",
+          "action": "navigate-to-practice"
+        },
+        {
+          "icon": "chart-icon",
+          "label": "Progress",
+          "action": "navigate-to-progress"
+        },
+        {
+          "icon": "settings-icon",
+          "label": "Settings",
+          "action": "navigate-to-settings"
+        }
+      ]
+    }
+  },
+  "background": {
+    "type": "solid",
+    "color": "#F8FAFC"
+  }
+}

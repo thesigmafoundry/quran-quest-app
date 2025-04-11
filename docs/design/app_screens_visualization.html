@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quranic Quest App Screens</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8fafc;
+        }
+        h1 {
+            color: #5D5FEF;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .screen-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 50px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .screen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .screen-title {
+            font-size: 24px;
+            color: #5D5FEF;
+            margin: 0;
+        }
+        .screen-description {
+            margin-bottom: 30px;
+        }
+        .screen-preview {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .welcome-screen {
+            background-color: #5D5FEF;
+            color: white;
+            padding: 40px 20px;
+            border-radius: 8px;
+            text-align: center;
+            height: 600px;
+            position: relative;
+        }
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 60px;
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: #5D5FEF;
+        }
+        .welcome-content {
+            margin: 40px 0;
+        }
+        .welcome-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        .welcome-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .button-container {
+            position: absolute;
+            bottom: 48px;
+            left: 0;
+            right: 0;
+            padding: 0 32px;
+        }
+        .primary-button {
+            background-color: white;
+            color: #5D5FEF;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            display: block;
+            text-align: center;
+        }
+        .text-button {
+            color: white;
+            text-align: center;
+            padding: 8px;
+            display: block;
+        }
+        .dashboard-screen {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            height: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .greeting {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #5D5FEF;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        .dashboard-content {
+            padding: 16px;
+            overflow-y: auto;
+            height: calc(100% - 130px);
+        }
+        .streak-container {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .streak-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .streak-text {
+            font-weight: bold;
+        }
+        .goal-container {
+            background-color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .goal-label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .progress-bar-container {
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #5D5FEF;
+            width: 75%;
+        }
+        .goal-sublabel {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-color: #7B7DF7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            font-size: 24px;
+        }
+        .card-title-container {
+            flex: 1;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .card-subtitle {
+            font-size: 14px;
+            color: #64748b;
+        }
+        .card-progress-container {
+            margin-bottom: 12px;
+        }
+        .card-button {
+            background-color: #5D5FEF;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 24px 0 12px 0;
+        }
+        .achievements-scroll {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
+        .achievement-badge {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-right: 12px;
+            width: 140px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .badge-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-color: #7B7DF7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+        .badge-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .badge-subtitle {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .family-member-item {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .family-member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #5D5FEF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            color: white;
+            font-weight: bold;
+        }
+        .family-member-info {
+            flex: 1;
+        }
+        .family-member-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .family-member-progress-container {
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .family-member-progress {
+            height: 100%;
+            background-color: #5D5FEF;
+        }
+        .family-member-streak {
+            margin-left: 12px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .text-button-center {
+            color: #5D5FEF;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            padding: 8px;
+            display: block;
+        }
+        .tab-bar {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 8px 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+        }
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+            display: block;
+            color: #64748b;
+        }
+        .tab-label {
+            font-size: 10px;
+            color: #64748b;
+        }
+        .active-tab {
+            color: #5D5FEF;
+            font-weight: bold;
+        }
+        .lesson-screen {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            height: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .back-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .settings-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+        .progress-container {
+            padding: 12px 16px;
+            background-color: white;
+        }
+        .progress-text {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .lesson-content {
+            padding: 16px;
+            overflow-y: auto;
+            height: calc(100% - 180px);
+        }
+        .verse-container {
+            background-color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .arabic-text {
+            font-size: 32px;
+            line-height: 48px;
+            margin-bottom: 16px;
+            font-weight: bold;
+            direction: rtl;
+        }
+        .transliteration-text {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .translation-text {
+            font-size: 16px;
+            color: #64748b;
+        }
+        .interaction-container {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .audio-button {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-color: #5D5FEF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 12px;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .instruction-text {
+            font-size: 14px;
+            color: #64748b;
+        }
+        .section-container {
+            margin-bottom: 24px;
+        }
+        .section-title-small {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .word-scroll {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
+        .word-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-right: 12px;
+            width: 160px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .word-arabic {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            direction: rtl;
+        }
+        .word-transliteration {
+            font-size: 14px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+        .word-translation {
+            font-size: 12px;
+            color: #64748b;
+            text-align: center;
+        }
+        .practice-container {
+            text-align: center;
+        }
+        .record-button {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-color: #5D5FEF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 12px;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .recording-button {
+            background-color: #EF4444;
+        }
+        .instruction-text-small {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .feedback-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .feedback-text {
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 20px;
+        }
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            background-color: white;
+            border-top: 1px solid #e2e8f0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .secondary-button {
+            background-color: white;
+            color: #5D5FEF;
+            border: 1px solid #5D5FEF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            flex: 1;
+            margin-right: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .primary-button-alt {
+            background-color: #5D5FEF;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            flex: 1;
+            margin-left: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .features-list {
+            margin-top: 20px;
+        }
+        .feature-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .feature-icon {
+            color: #5D5FEF;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .feature-text {
+            flex: 1;
+        }
+        @media (min-width: 768px) {
+            .screen-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .screen-info {
+                flex: 1;
+                padding-right: 30px;
+            }
+            .screen-preview {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Quranic Quest Mobile App Screens</h1>
+    
+    <div class="screen-container">
+        <div class="screen-info">
+            <div class="screen-header">
+                <h2 class="screen-title">Welcome Screen</h2>
+            </div>
+            <div class="screen-description">
+                <p>The Welcome Screen serves as the entry point to the Quranic Quest app, introducing users to the app's purpose and providing options to get started or sign in.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">App logo and branding with the primary purple color scheme</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Welcoming title and subtitle explaining the app's purpose</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">"Get Started" button for new users that navigates to the Dashboard</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">"Already have an account? Sign in" option for returning users</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="screen-preview">
+            <div class="welcome-screen">
+                <div class="logo-placeholder">
+                    <span>Q</span>
+                </div>
+                <div class="welcome-content">
+                    <div class="welcome-title">Welcome to Quranic Quest</div>
+                    <div class="welcome-subtitle">An interactive Quran learning experience for your family</div>
+                </div>
+                <div class="button-container">
+                    <div class="primary-button">Get Started</div>
+                    <div class="text-button">Already have an account? Sign in</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="screen-container">
+        <div class="screen-info">
+            <div class="screen-header">
+                <h2 class="screen-title">Dashboard Screen</h2>
+            </div>
+            <div class="screen-description">
+                <p>The Dashboard Screen serves as the main hub of the app, providing an overview of the user's learning progress, achievements, and family activity.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Personalized greeting with user avatar</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Streak counter showing 14 days of continuous learning</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Daily goal progress tracking (11 of 15 minutes completed)</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Lesson cards with progress indicators and navigation to lessons</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Recent achievements section with badges</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Family progress tracking for multiple family members</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Bottom navigation tabs for app sections</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="screen-preview">
+            <div class="dashboard-screen">
+                <div class="header">
+                    <div class="greeting">Assalamu Alaikum, Ahmed</div>
+                    <div class="avatar">A</div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="streak-container">
+                        <div class="streak-icon">🔥</div>
+                        <div class="streak-text">14 Day Streak</div>
+                    </div>
+                    
+                    <div class="goal-container">
+                        <div class="goal-label">Today's Goal: 15 minutes</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="goal-sublabel">11 minutes completed</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📖</div>
+                            <div class="card-title-container">
+                                <div class="card-title">Continue Your Lesson</div>
+                                <div class="card-subtitle">Surah Al-Fatiha: Verse 3</div>
+                            </div>
+                        </div>
+                        <div class="card-progress-container">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="card-button">Continue</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background-color: #33CFFF;">🎤</div>
+                            <div class="card-title-container">
+                                <div class="card-title">Practice Pronunciation</div>
+                                <div class="card-subtitle">10-minute interactive session</div>
+                            </div>
+                        </div>
+                        <div class="card-button">Start Practice</div>
+                    </div>
+                    
+                    <div class="section-title">Recent Achievements</div>
+                    <div class="achievements-scroll">
+                        <div class="achievement-badge">
+                            <div class="badge-icon">⭐</div>
+                            <div class="badge-title">Perfect Pronunciation</div>
+                            <div class="badge-subtitle">Mastered 5 letters</div>
+                        </div>
+                        
+                        <div class="achievement-badge">
+                            <div class="badge-icon">📅</div>
+                            <div class="badge-title">7-Day Streak</div>
+                            <div class="badge-subtitle">Practiced every day</div>
+                        </div>
+                        
+                        <div class="achievement-badge">
+                            <div class="badge-icon">📚</div>
+                            <div class="badge-title">First Surah</div>
+                            <div class="badge-subtitle">Completed Al-Fatiha</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-title">Family Progress</div>
+                    <div class="family-member-item">
+                        <div class="family-member-avatar">A</div>
+                        <div class="family-member-info">
+                            <div class="family-member-name">Ahmed</div>
+                            <div class="family-member-progress-container">
+                                <div class="family-member-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="family-member-streak">14 🔥</div>
+                    </div>
+                    
+                    <div class="family-member-item">
+                        <div class="family-member-avatar" style="background-color: #00C2FF;">F</div>
+                        <div class="family-member-info">
+                            <div class="family-member-name">Fatima</div>
+                            <div class="family-member-progress-container">
+                                <div class="family-member-progress" style="width: 62%"></div>
+                            </div>
+                        </div>
+                        <div class="family-member-streak">8 🔥</div>
+                    </div>
+                    
+                    <div class="text-button-center">View Family Dashboard</div>
+                </div>
+                
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <span class="tab-icon active-tab">🏠</span>
+                        <span class="tab-label active-tab">Home</span>
+                    </div>
+                    
+                    <div class="tab-item">
+                        <span class="tab-icon">📚</span>
+                        <span class="tab-label">Lessons</span>
+                    </div>
+                    
+                    <div class="tab-item">
+                        <span class="tab-icon">🎤</span>
+                        <span class="tab-label">Practice</span>
+                    </div>
+                    
+                    <div class="tab-item">
+                        <span class="tab-icon">📊</span>
+                        <span class="tab-label">Progress</span>
+                    </div>
+                    
+                    <div class="tab-item">
+                        <span class="tab-icon">⚙️</span>
+                        <span class="tab-label">Settings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="screen-container">
+        <div class="screen-info">
+            <div class="screen-header">
+                <h2 class="screen-title">Lesson Screen</h2>
+            </div>
+            <div class="screen-description">
+                <p>The Lesson Screen provides an interactive learning experience for Quranic verses, with pronunciation practice and AI feedback.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Verse display in Arabic with transliteration and translation</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Audio playback button for listening to correct pronunciation</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Word-by-word breakdown with meanings</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Interactive pronunciation practice with recording functionality</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">AI feedback section that appears after recording</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Navigation controls to move between verses</div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <div class="feature-text">Back button to return to the Dashboard</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="screen-preview">
+            <div class="lesson-screen">
+                <div class="lesson-header">
+                    <div class="back-button">←</div>
+                    <div class="header-title">Surah Al-Fatiha</div>
+                    <div class="settings-button">⚙️</div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 60%"></div>
+                    </div>
+                    <div class="progress-text">Verse 3 of 7</div>
+                </div>
+                
+                <div class="lesson-content">
+                    <div class="verse-container">
+                        <div class="arabic-text">الرَّحْمَٰنِ الرَّحِيمِ</div>
+                        <div class="transliteration-text">Ar-Raḥmāni r-Raḥīm</div>
+                        <div class="translation-text">The Most Gracious, the Most Merciful</div>
+                    </div>
+                    
+                    <div class="interaction-container">
+                        <div class="audio-button">▶️</div>
+                        <div class="instruction-text">Listen carefully, then practice reading aloud</div>
+                    </div>
+                    
+                    <div class="section-container">
+                        <div class="section-title-small">Word by Word</div>
+                        <div class="word-scroll">
+                            <div class="word-card">
+                                <div class="word-arabic">الرَّحْمَٰنِ</div>
+                                <div class="word-transliteration">Ar-Raḥmāni</div>
+                                <div class="word-translation">The Most Gracious</div>
+                            </div>
+                            
+                            <div class="word-card">
+                                <div class="word-arabic">الرَّحِيمِ</div>
+                                <div class="word-transliteration">r-Raḥīm</div>
+                                <div class="word-translation">The Most Merciful</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-container">
+                        <div class="section-title-small">Practice Pronunciation</div>
+                        <div class="practice-container">
+                            <div class="record-button">🎤</div>
+                            <div class="instruction-text-small">Tap to record your recitation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-container">
+                        <div class="section-title-small">AI Feedback</div>
+                        <div class="feedback-container">
+                            <div class="feedback-text">
+                                Your pronunciation of "الرَّحْمَٰنِ" is excellent! Try to extend the vowel sound in "الرَّحِيمِ" a bit longer.
+                            </div>
+                            <div class="secondary-button">Get Detailed Feedback</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-controls">
+                    <div class="secondary-button">Previous Verse</div>
+                    <div class="primary-button-alt">Next Verse</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

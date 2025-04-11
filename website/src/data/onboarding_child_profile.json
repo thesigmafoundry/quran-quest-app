@@ -1,0 +1,76 @@
+// Onboarding Screen 3: Child Profile Setup
+{
+  "screen": "ChildProfileSetup",
+  "elements": {
+    "header": {
+      "type": "text",
+      "position": "top",
+      "style": "heading-2",
+      "content": "Set Up Child Profile"
+    },
+    "subtitle": {
+      "type": "text",
+      "position": "below-header",
+      "style": "body-medium",
+      "content": "Help us personalize the learning experience"
+    },
+    "avatarSelection": {
+      "type": "avatar-picker",
+      "position": "top-center",
+      "style": "large-circle",
+      "options": ["avatar1", "avatar2", "avatar3", "avatar4", "avatar5", "avatar6"]
+    },
+    "nameField": {
+      "type": "input",
+      "position": "below-avatar",
+      "style": "text-input",
+      "label": "Child's Name",
+      "placeholder": "Enter name"
+    },
+    "ageField": {
+      "type": "dropdown",
+      "position": "below-name",
+      "style": "dropdown-input",
+      "label": "Age",
+      "options": ["5-7 years", "8-10 years", "11-13 years", "14-15 years"]
+    },
+    "experienceField": {
+      "type": "radio-group",
+      "position": "below-age",
+      "style": "radio-input",
+      "label": "Quran Reading Experience",
+      "options": ["Beginner", "Intermediate", "Advanced"]
+    },
+    "learningGoalField": {
+      "type": "checkbox-group",
+      "position": "below-experience",
+      "style": "checkbox-input",
+      "label": "Learning Goals (Select all that apply)",
+      "options": [
+        "Learn to read Arabic letters",
+        "Improve pronunciation",
+        "Memorize short surahs",
+        "Understand meaning",
+        "Learn tajweed rules"
+      ]
+    },
+    "continueButton": {
+      "type": "button",
+      "position": "bottom",
+      "style": "primary",
+      "content": "Continue",
+      "action": "navigate-to-next-onboarding-step"
+    },
+    "backButton": {
+      "type": "button",
+      "position": "bottom-left",
+      "style": "text-only",
+      "content": "Back",
+      "action": "navigate-to-previous-screen"
+    }
+  },
+  "background": {
+    "type": "solid",
+    "color": "#FFFFFF"
+  }
+}

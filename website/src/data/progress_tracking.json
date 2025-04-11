@@ -1,0 +1,262 @@
+// Progress Tracking Screen: User Progress Dashboard
+{
+  "screen": "ProgressTracking",
+  "elements": {
+    "header": {
+      "type": "container",
+      "position": "top",
+      "style": "header-container",
+      "content": [
+        {
+          "type": "button",
+          "style": "icon-button",
+          "content": "back-arrow",
+          "action": "navigate-to-dashboard"
+        },
+        {
+          "type": "text",
+          "style": "heading-2",
+          "content": "Your Progress"
+        },
+        {
+          "type": "dropdown",
+          "style": "filter-dropdown",
+          "content": {
+            "options": ["Last 7 Days", "Last 30 Days", "All Time"],
+            "selected": "Last 7 Days"
+          }
+        }
+      ]
+    },
+    "summaryStats": {
+      "type": "container",
+      "position": "below-header",
+      "style": "stats-container",
+      "content": [
+        {
+          "type": "stat-card",
+          "style": "primary-stat",
+          "content": {
+            "icon": "clock-icon",
+            "value": "3.5",
+            "label": "Hours Practiced",
+            "change": "+0.5 from last week"
+          }
+        },
+        {
+          "type": "stat-card",
+          "style": "primary-stat",
+          "content": {
+            "icon": "book-icon",
+            "value": "12",
+            "label": "Verses Completed",
+            "change": "+3 from last week"
+          }
+        },
+        {
+          "type": "stat-card",
+          "style": "primary-stat",
+          "content": {
+            "icon": "star-icon",
+            "value": "87%",
+            "label": "Accuracy",
+            "change": "+2% from last week"
+          }
+        }
+      ]
+    },
+    "activityChart": {
+      "type": "container",
+      "position": "below-stats",
+      "style": "chart-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Daily Activity"
+        },
+        {
+          "type": "bar-chart",
+          "style": "weekly-chart",
+          "content": {
+            "data": [
+              {"day": "Mon", "minutes": 15},
+              {"day": "Tue", "minutes": 20},
+              {"day": "Wed", "minutes": 10},
+              {"day": "Thu", "minutes": 25},
+              {"day": "Fri", "minutes": 30},
+              {"day": "Sat", "minutes": 15},
+              {"day": "Sun", "minutes": 0}
+            ],
+            "target": 20
+          }
+        }
+      ]
+    },
+    "skillProgress": {
+      "type": "container",
+      "position": "below-chart",
+      "style": "skills-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Skills Mastery"
+        },
+        {
+          "type": "skill-progress-item",
+          "style": "skill-item",
+          "content": {
+            "icon": "letter-icon",
+            "label": "Letter Recognition",
+            "progress": 90,
+            "level": "Advanced"
+          }
+        },
+        {
+          "type": "skill-progress-item",
+          "style": "skill-item",
+          "content": {
+            "icon": "sound-icon",
+            "label": "Pronunciation",
+            "progress": 75,
+            "level": "Intermediate"
+          }
+        },
+        {
+          "type": "skill-progress-item",
+          "style": "skill-item",
+          "content": {
+            "icon": "book-icon",
+            "label": "Tajweed Rules",
+            "progress": 45,
+            "level": "Beginner"
+          }
+        },
+        {
+          "type": "skill-progress-item",
+          "style": "skill-item",
+          "content": {
+            "icon": "brain-icon",
+            "label": "Memorization",
+            "progress": 60,
+            "level": "Intermediate"
+          }
+        }
+      ]
+    },
+    "recentAchievements": {
+      "type": "container",
+      "position": "below-skills",
+      "style": "achievements-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Recent Achievements"
+        },
+        {
+          "type": "achievement-item",
+          "style": "achievement-row",
+          "content": {
+            "icon": "medal-icon",
+            "title": "Perfect Pronunciation",
+            "description": "Achieved 100% accuracy in pronunciation practice",
+            "date": "2 days ago"
+          }
+        },
+        {
+          "type": "achievement-item",
+          "style": "achievement-row",
+          "content": {
+            "icon": "streak-icon",
+            "title": "10-Day Streak",
+            "description": "Practiced for 10 consecutive days",
+            "date": "5 days ago"
+          }
+        },
+        {
+          "type": "button",
+          "style": "text-button",
+          "content": "View All Achievements",
+          "action": "navigate-to-achievements"
+        }
+      ]
+    },
+    "suggestedActions": {
+      "type": "container",
+      "position": "below-achievements",
+      "style": "suggestions-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Suggested Next Steps"
+        },
+        {
+          "type": "action-card",
+          "style": "suggestion-card",
+          "content": {
+            "icon": "practice-icon",
+            "title": "Practice Pronunciation",
+            "description": "Focus on improving your tajweed for better accuracy",
+            "button": {
+              "text": "Start Practice",
+              "action": "navigate-to-practice"
+            }
+          }
+        },
+        {
+          "type": "action-card",
+          "style": "suggestion-card",
+          "content": {
+            "icon": "review-icon",
+            "title": "Review Previous Lessons",
+            "description": "Strengthen your understanding of completed verses",
+            "button": {
+              "text": "Review",
+              "action": "navigate-to-review"
+            }
+          }
+        }
+      ]
+    },
+    "navigationBar": {
+      "type": "tab-bar",
+      "position": "bottom",
+      "style": "primary-tabs",
+      "content": [
+        {
+          "icon": "home-icon",
+          "label": "Home",
+          "action": "navigate-to-dashboard"
+        },
+        {
+          "icon": "book-icon",
+          "label": "Lessons",
+          "action": "navigate-to-lessons"
+        },
+        {
+          "icon": "microphone-icon",
+          "label": "Practice",
+          "action": "navigate-to-practice"
+        },
+        {
+          "icon": "chart-icon",
+          "label": "Progress",
+          "action": "navigate-to-progress",
+          "active": true
+        },
+        {
+          "icon": "settings-icon",
+          "label": "Settings",
+          "action": "navigate-to-settings"
+        }
+      ]
+    }
+  },
+  "background": {
+    "type": "solid",
+    "color": "#F8FAFC"
+  }
+}

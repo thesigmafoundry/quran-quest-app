@@ -1,0 +1,185 @@
+// Lesson Screen: Interactive Lesson Interface
+{
+  "screen": "LessonInterface",
+  "elements": {
+    "header": {
+      "type": "container",
+      "position": "top",
+      "style": "lesson-header",
+      "content": [
+        {
+          "type": "button",
+          "style": "icon-button",
+          "content": "back-arrow",
+          "action": "navigate-to-dashboard"
+        },
+        {
+          "type": "text",
+          "style": "heading-2",
+          "content": "Surah Al-Fatiha"
+        },
+        {
+          "type": "button",
+          "style": "icon-button",
+          "content": "settings-icon",
+          "action": "open-lesson-settings"
+        }
+      ]
+    },
+    "progressIndicator": {
+      "type": "progress-bar",
+      "position": "below-header",
+      "style": "lesson-progress",
+      "content": {
+        "progress": 60,
+        "label": "Verse 3 of 7"
+      }
+    },
+    "verseDisplay": {
+      "type": "container",
+      "position": "middle-top",
+      "style": "verse-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "arabic-large",
+          "content": "الرَّحْمَٰنِ الرَّحِيمِ",
+          "direction": "rtl"
+        },
+        {
+          "type": "text",
+          "style": "transliteration-medium",
+          "content": "Ar-Raḥmāni r-Raḥīm"
+        },
+        {
+          "type": "text",
+          "style": "translation-medium",
+          "content": "The Most Gracious, the Most Merciful"
+        }
+      ]
+    },
+    "interactionArea": {
+      "type": "container",
+      "position": "middle",
+      "style": "interaction-container",
+      "content": [
+        {
+          "type": "button",
+          "style": "audio-button-large",
+          "content": "play-icon",
+          "action": "play-verse-audio"
+        },
+        {
+          "type": "text",
+          "style": "instruction-text",
+          "content": "Listen carefully, then practice reading aloud"
+        }
+      ]
+    },
+    "wordByWordSection": {
+      "type": "container",
+      "position": "below-interaction",
+      "style": "word-breakdown-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Word by Word"
+        },
+        {
+          "type": "horizontal-scroll",
+          "style": "word-scroll",
+          "content": [
+            {
+              "type": "word-card",
+              "content": {
+                "arabic": "الرَّحْمَٰنِ",
+                "transliteration": "Ar-Raḥmāni",
+                "translation": "The Most Gracious",
+                "action": "play-word-audio"
+              }
+            },
+            {
+              "type": "word-card",
+              "content": {
+                "arabic": "الرَّحِيمِ",
+                "transliteration": "r-Raḥīm",
+                "translation": "The Most Merciful",
+                "action": "play-word-audio"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "pronunciationPractice": {
+      "type": "container",
+      "position": "below-word-section",
+      "style": "practice-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Practice Pronunciation"
+        },
+        {
+          "type": "button",
+          "style": "record-button",
+          "content": "microphone-icon",
+          "action": "start-recording"
+        },
+        {
+          "type": "text",
+          "style": "instruction-text-small",
+          "content": "Tap to record your recitation"
+        }
+      ]
+    },
+    "feedbackArea": {
+      "type": "container",
+      "position": "below-practice",
+      "style": "feedback-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "AI Feedback"
+        },
+        {
+          "type": "text",
+          "style": "feedback-text",
+          "content": "Your pronunciation of \"الرَّحْمَٰنِ\" is excellent! Try to extend the vowel sound in \"الرَّحِيمِ\" a bit longer."
+        },
+        {
+          "type": "button",
+          "style": "secondary-button-small",
+          "content": "Get Detailed Feedback",
+          "action": "show-detailed-feedback"
+        }
+      ]
+    },
+    "navigationControls": {
+      "type": "container",
+      "position": "bottom",
+      "style": "lesson-navigation",
+      "content": [
+        {
+          "type": "button",
+          "style": "secondary-button",
+          "content": "Previous Verse",
+          "action": "navigate-to-previous-verse"
+        },
+        {
+          "type": "button",
+          "style": "primary-button",
+          "content": "Next Verse",
+          "action": "navigate-to-next-verse"
+        }
+      ]
+    }
+  },
+  "background": {
+    "type": "solid",
+    "color": "#FFFFFF"
+  }
+}

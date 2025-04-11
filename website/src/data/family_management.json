@@ -1,0 +1,305 @@
+// Family Management Screen: Parent Dashboard
+{
+  "screen": "FamilyManagement",
+  "elements": {
+    "header": {
+      "type": "container",
+      "position": "top",
+      "style": "header-container",
+      "content": [
+        {
+          "type": "button",
+          "style": "icon-button",
+          "content": "back-arrow",
+          "action": "navigate-to-dashboard"
+        },
+        {
+          "type": "text",
+          "style": "heading-2",
+          "content": "Family Dashboard"
+        },
+        {
+          "type": "button",
+          "style": "icon-button",
+          "content": "add-icon",
+          "action": "add-family-member"
+        }
+      ]
+    },
+    "familySummary": {
+      "type": "container",
+      "position": "below-header",
+      "style": "family-summary-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "heading-3",
+          "content": "Family Activity"
+        },
+        {
+          "type": "stat-row",
+          "style": "family-stats",
+          "content": [
+            {
+              "label": "Active Members",
+              "value": "3"
+            },
+            {
+              "label": "Total Practice",
+              "value": "8.5 hrs"
+            },
+            {
+              "label": "Weekly Goal",
+              "value": "75%"
+            }
+          ]
+        }
+      ]
+    },
+    "childrenProfiles": {
+      "type": "container",
+      "position": "below-summary",
+      "style": "profiles-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Children's Progress"
+        },
+        {
+          "type": "child-profile-card",
+          "style": "profile-card",
+          "content": {
+            "avatar": "avatar1",
+            "name": "Ahmed",
+            "age": "9 years",
+            "level": "Intermediate",
+            "streak": "14 days",
+            "lastActive": "Today",
+            "progress": 85,
+            "stats": [
+              {
+                "label": "Lessons Completed",
+                "value": "24"
+              },
+              {
+                "label": "Accuracy",
+                "value": "92%"
+              },
+              {
+                "label": "Practice Time",
+                "value": "4.2 hrs"
+              }
+            ],
+            "recentAchievements": [
+              "Completed Surah Al-Fatiha",
+              "Perfect Pronunciation Badge"
+            ],
+            "actions": [
+              {
+                "icon": "view-icon",
+                "label": "View Details",
+                "action": "view-child-details"
+              },
+              {
+                "icon": "settings-icon",
+                "label": "Manage",
+                "action": "manage-child-account"
+              }
+            ]
+          }
+        },
+        {
+          "type": "child-profile-card",
+          "style": "profile-card",
+          "content": {
+            "avatar": "avatar2",
+            "name": "Fatima",
+            "age": "7 years",
+            "level": "Beginner",
+            "streak": "8 days",
+            "lastActive": "Yesterday",
+            "progress": 62,
+            "stats": [
+              {
+                "label": "Lessons Completed",
+                "value": "15"
+              },
+              {
+                "label": "Accuracy",
+                "value": "85%"
+              },
+              {
+                "label": "Practice Time",
+                "value": "2.8 hrs"
+              }
+            ],
+            "recentAchievements": [
+              "Learned 10 Arabic Letters",
+              "7-Day Streak Badge"
+            ],
+            "actions": [
+              {
+                "icon": "view-icon",
+                "label": "View Details",
+                "action": "view-child-details"
+              },
+              {
+                "icon": "settings-icon",
+                "label": "Manage",
+                "action": "manage-child-account"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "weeklyOverview": {
+      "type": "container",
+      "position": "below-profiles",
+      "style": "weekly-overview-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Weekly Overview"
+        },
+        {
+          "type": "stacked-bar-chart",
+          "style": "weekly-chart",
+          "content": {
+            "data": [
+              {"day": "Mon", "ahmed": 15, "fatima": 10},
+              {"day": "Tue", "ahmed": 20, "fatima": 15},
+              {"day": "Wed", "ahmed": 10, "fatima": 5},
+              {"day": "Thu", "ahmed": 25, "fatima": 20},
+              {"day": "Fri", "ahmed": 30, "fatima": 15},
+              {"day": "Sat", "ahmed": 15, "fatima": 10},
+              {"day": "Sun", "ahmed": 0, "fatima": 0}
+            ],
+            "legend": [
+              {"name": "Ahmed", "color": "#5D5FEF"},
+              {"name": "Fatima", "color": "#00C2FF"}
+            ]
+          }
+        }
+      ]
+    },
+    "parentControls": {
+      "type": "container",
+      "position": "below-overview",
+      "style": "controls-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Parent Controls"
+        },
+        {
+          "type": "control-card",
+          "style": "control-item",
+          "content": {
+            "icon": "notification-icon",
+            "title": "Notifications",
+            "description": "Set up alerts for children's activity",
+            "action": "navigate-to-notifications"
+          }
+        },
+        {
+          "type": "control-card",
+          "style": "control-item",
+          "content": {
+            "icon": "goal-icon",
+            "title": "Learning Goals",
+            "description": "Set and manage learning objectives",
+            "action": "navigate-to-goals"
+          }
+        },
+        {
+          "type": "control-card",
+          "style": "control-item",
+          "content": {
+            "icon": "time-icon",
+            "title": "Screen Time",
+            "description": "Manage app usage limits",
+            "action": "navigate-to-screen-time"
+          }
+        }
+      ]
+    },
+    "familyRecommendations": {
+      "type": "container",
+      "position": "below-controls",
+      "style": "recommendations-container",
+      "content": [
+        {
+          "type": "text",
+          "style": "section-header-small",
+          "content": "Recommendations"
+        },
+        {
+          "type": "recommendation-card",
+          "style": "recommendation-item",
+          "content": {
+            "icon": "group-icon",
+            "title": "Family Learning Session",
+            "description": "Schedule a group session to practice together",
+            "button": {
+              "text": "Schedule",
+              "action": "schedule-family-session"
+            }
+          }
+        },
+        {
+          "type": "recommendation-card",
+          "style": "recommendation-item",
+          "content": {
+            "icon": "challenge-icon",
+            "title": "Weekly Challenge",
+            "description": "Set up a friendly competition between family members",
+            "button": {
+              "text": "Create Challenge",
+              "action": "create-family-challenge"
+            }
+          }
+        }
+      ]
+    },
+    "navigationBar": {
+      "type": "tab-bar",
+      "position": "bottom",
+      "style": "primary-tabs",
+      "content": [
+        {
+          "icon": "home-icon",
+          "label": "Home",
+          "action": "navigate-to-dashboard"
+        },
+        {
+          "icon": "book-icon",
+          "label": "Lessons",
+          "action": "navigate-to-lessons"
+        },
+        {
+          "icon": "microphone-icon",
+          "label": "Practice",
+          "action": "navigate-to-practice"
+        },
+        {
+          "icon": "chart-icon",
+          "label": "Progress",
+          "action": "navigate-to-progress"
+        },
+        {
+          "icon": "settings-icon",
+          "label": "Settings",
+          "action": "navigate-to-settings"
+        }
+      ]
+    }
+  },
+  "background": {
+    "type": "solid",
+    "color": "#F8FAFC"
+  }
+}

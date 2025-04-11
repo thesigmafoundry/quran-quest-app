@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quranic Quest - React Native Implementation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #5D5FEF;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .screen-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .screen-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .screen-title::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #5D5FEF;
+            margin-right: 12px;
+            border-radius: 4px;
+        }
+        .screen-description {
+            margin-bottom: 30px;
+        }
+        .phone-mockup {
+            background-color: #000;
+            border-radius: 40px;
+            padding: 12px;
+            width: 300px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .phone-screen {
+            background-color: white;
+            border-radius: 30px;
+            overflow: hidden;
+            height: 600px;
+            position: relative;
+        }
+        .welcome-screen {
+            background: linear-gradient(135deg, #5D5FEF 0%, #6E70FF 100%);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 30px 40px;
+            color: white;
+        }
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .logo-text {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .welcome-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .welcome-subtitle {
+            font-size: 16px;
+            text-align: center;
+            opacity: 0.8;
+            margin-bottom: 60px;
+        }
+        .get-started-btn {
+            background-color: white;
+            color: #5D5FEF;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .sign-in-btn {
+            color: white;
+            text-align: center;
+            opacity: 0.9;
+        }
+        .dashboard-screen {
+            height: 100%;
+            background-color: #f8f9fa;
+            overflow-y: auto;
+        }
+        .status-bar {
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            background-color: #f8f9fa;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+        .greeting {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #5D5FEF;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .dashboard-content {
+            padding: 0 24px;
+        }
+        .stats-container {
+            display: flex;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-right: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .stat-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin: 24px 0 16px;
+        }
+        .lesson-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .lesson-header {
+            display: flex;
+            margin-bottom: 16px;
+        }
+        .lesson-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: #5D5FEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: white;
+            font-size: 20px;
+        }
+        .practice-icon {
+            background-color: #00C2FF;
+        }
+        .lesson-info {
+            flex: 1;
+        }
+        .lesson-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .lesson-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+        .progress-container {
+            height: 4px;
+            background-color: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 60%;
+            background-color: #5D5FEF;
+            border-radius: 2px;
+        }
+        .lesson-action {
+            align-self: flex-start;
+            padding: 12px 24px;
+            background-color: #5D5FEF;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+        }
+        .tab-bar {
+            height: 83px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding-bottom: 16px;
+        }
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 8px;
+        }
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+            color: #999;
+        }
+        .tab-label {
+            font-size: 10px;
+            color: #999;
+        }
+        .active-tab .tab-icon,
+        .active-tab .tab-label {
+            color: #5D5FEF;
+            font-weight: 600;
+        }
+        .lesson-screen {
+            height: 100%;
+            background-color: #f8f9fa;
+            overflow-y: auto;
+        }
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+        .back-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333;
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .settings-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #333;
+        }
+        .lesson-progress-container {
+            height: 4px;
+            background-color: #eee;
+            margin: 0 24px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .lesson-progress-bar {
+            height: 100%;
+            width: 40%;
+            background-color: #5D5FEF;
+            border-radius: 2px;
+        }
+        .progress-text {
+            font-size: 12px;
+            color: #999;
+            margin: 4px 24px;
+        }
+        .lesson-content {
+            padding: 16px 24px;
+        }
+        .verse-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .arabic-text {
+            font-size: 32px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .transliteration-text {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .translation-text {
+            font-size: 16px;
+            color: #999;
+            text-align: center;
+        }
+        .audio-button {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .audio-button-inner {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background-color: #5D5FEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(93, 95, 239, 0.3);
+        }
+        .audio-button-label {
+            font-size: 14px;
+            color: #666;
+            flex: 1;
+        }
+        .word-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .word-arabic {
+            font-size: 24px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .word-transliteration {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .word-translation {
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+        }
+        .record-button {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .record-button-text {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        .record-button-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .feedback-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .feedback-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .feedback-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 20px;
+        }
+        .feedback-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #5D5FEF;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .nav-button {
+            padding: 12px 24px;
+            background-color: white;
+            border-radius: 12px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .code-section {
+            margin-top: 30px;
+        }
+        .code-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #5D5FEF;
+        }
+        pre {
+            background-color: #f1f3f5;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .features-list {
+            margin-top: 20px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .feature-icon {
+            color: #5D5FEF;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .feature-text {
+            flex: 1;
+        }
+        .implementation-notes {
+            background-color: #e9f7ff;
+            border-left: 4px solid #00C2FF;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .implementation-notes h3 {
+            color: #00C2FF;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quranic Quest - React Native Implementation</h1>
+    
+    <div class="screen-container">
+        <div class="screen-title">Welcome Screen</div>
+        <div class="screen-description">
+            <p>The entry point to the Quranic Quest app, featuring a clean, minimalist design with gradient background and frosted glass effects.</p>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Clean, minimalist design with gradient background</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Modern frosted glass logo container with subtle shadow</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Refined typography with proper spacing and hierarchy</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Elegant button design with subtle shadow effects</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <div class="welcome-screen">
+                    <div class="logo-container">
+                        <div class="logo-text">Q</div>
+                    </div>
+                    <div>
+                        <div class="welcome-title">Welcome to Quranic Quest</div>
+                        <div class="welcome-subtitle">An interactive Quran learning experience for your family</div>
+                    </div>
+                    <div style="width: 100%;">
+                        <div class="get-started-btn">Get Started</div>
+                        <div class="sign-in-btn">Already have an account? Sign in</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="implementation-notes">
+            <h3>Implementation Notes</h3>
+            <p>This screen is implemented using React Native's core components with custom styling to achieve the modern, Apple/Uber-inspired design. The gradient background is created using a linear gradient, and the frosted glass effect is simulated with semi-transparent backgrounds and subtle shadows.</p>
+        </div>
+    </div>
+    
+    <div class="screen-container">
+        <div class="screen-title">Dashboard Screen</div>
+        <div class="screen-description">
+            <p>The main hub of the app featuring a clean, card-based UI with subtle shadows and proper spacing between elements.</p>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Clean, airy layout with proper spacing between elements</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Card-based UI with subtle shadows and rounded corners</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Elegant stats display with gradient progress indicators</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Horizontal scrolling sections for achievements</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Modern tab bar with clear visual hierarchy</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <div class="dashboard-screen">
+                    <div class="status-bar">
+                        <div>9:41</div>
+                        <div>📶 🔋</div>
+                    </div>
+                    
+                    <div class="dashboard-header">
+                        <div class="greeting">Assalamu Alaikum, Ahmed</div>
+                        <div class="avatar">A</div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-title">Streak</div>
+                                <div class="stat-value">🔥 14</div>
+                            </div>
+                            <div class="stat-card" style="margin-right: 0;">
+                                <div class="stat-title">Today</div>
+                                <div class="stat-value">11/15 min</div>
+                            </div>
+                        </div>
+                        
+                        <div class="section-title">Continue Learning</div>
+                        
+                        <div class="lesson-card">
+                            <div class="lesson-header">
+                                <div class="lesson-icon">📖</div>
+                                <div class="lesson-info">
+                                    <div class="lesson-title">Continue Your Lesson</div>
+                                    <div class="lesson-subtitle">Surah Al-Fatiha: Verse 3</div>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            
+                            <div class="lesson-action">Continue</div>
+                        </div>
+                        
+                        <div class="lesson-card">
+                            <div class="lesson-header">
+                                <div class="lesson-icon practice-icon">🎤</div>
+                                <div class="lesson-info">
+                                    <div class="lesson-title">Practice Pronunciation</div>
+                                    <div class="lesson-subtitle">10-minute interactive session</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-action">Start Practice</div>
+                        </div>
+                        
+                        <div class="section-title">Recent Achievements</div>
+                        
+                        <!-- Achievements would be scrollable horizontally -->
+                        <div style="display: flex; overflow-x: auto; padding-bottom: 16px;">
+                            <div style="min-width: 120px; background-color: white; border-radius: 16px; padding: 16px; margin-right: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); text-align: center;">
+                                <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #5D5FEF; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: white;">⭐</div>
+                                <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px;">Perfect Pronunciation</div>
+                                <div style="font-size: 12px; color: #666;">Mastered 5 letters</div>
+                            </div>
+                            
+                            <div style="min-width: 120px; background-color: white; border-radius: 16px; padding: 16px; margin-right: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); text-align: center;">
+                                <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #5D5FEF; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: white;">📅</div>
+                                <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px;">7-Day Streak</div>
+                                <div style="font-size: 12px; color: #666;">Practiced every day</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-bar">
+                        <div class="tab active-tab">
+                            <div class="tab-icon">🏠</div>
+                            <div class="tab-label">Home</div>
+                        </div>
+                        <div class="tab">
+                            <div class="tab-icon">📚</div>
+                            <div class="tab-label">Lessons</div>
+                        </div>
+                        <div class="tab">
+                            <div class="tab-icon">🎤</div>
+                            <div class="tab-label">Practice</div>
+                        </div>
+                        <div class="tab">
+                            <div class="tab-icon">📊</div>
+                            <div class="tab-label">Progress</div>
+                        </div>
+                        <div class="tab">
+                            <div class="tab-icon">⚙️</div>
+                            <div class="tab-label">Settings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="implementation-notes">
+            <h3>Implementation Notes</h3>
+            <p>The Dashboard screen uses a card-based UI pattern with subtle shadows to create depth without visual heaviness. ScrollView components are used for the main content area and horizontal scrolling sections. The tab bar uses a clean, modern design with clear visual hierarchy to indicate the active tab.</p>
+        </div>
+    </div>
+    
+    <div class="screen-container">
+        <div class="screen-title">Lesson Screen</div>
+        <div class="screen-description">
+            <p>The interactive learning interface featuring elegant verse display, audio playback, and pronunciation practice with AI feedback.</p>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Elegant verse display with proper typography for Arabic text</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Modern circular buttons with gradient backgrounds</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Clean card-based UI for word-by-word breakdown</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Intuitive recording interface with state changes</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Sophisticated navigation controls with proper visual hierarchy</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <div class="lesson-screen">
+                    <div class="status-bar">
+                        <div>9:41</div>
+                        <div>📶 🔋</div>
+                    </div>
+                    
+                    <div class="lesson-header">
+                        <div class="back-button">←</div>
+                        <div class="header-title">Surah Al-Fatiha</div>
+                        <div class="settings-button">⚙️</div>
+                    </div>
+                    
+                    <div class="lesson-progress-container">
+                        <div class="lesson-progress-bar"></div>
+                    </div>
+                    <div class="progress-text">Verse 3 of 7</div>
+                    
+                    <div class="lesson-content">
+                        <div class="verse-card">
+                            <div class="arabic-text">الرَّحْمَٰنِ الرَّحِيمِ</div>
+                            <div class="transliteration-text">Ar-Raḥmāni r-Raḥīm</div>
+                            <div class="translation-text">The Most Gracious, the Most Merciful</div>
+                        </div>
+                        
+                        <div class="audio-button">
+                            <div class="audio-button-inner">▶️</div>
+                            <div class="audio-button-label">Listen carefully, then practice reading aloud</div>
+                        </div>
+                        
+                        <div class="section-title">Word by Word</div>
+                        
+                        <div class="word-card">
+                            <div class="word-arabic">الرَّحْمَٰنِ</div>
+                            <div class="word-transliteration">Ar-Raḥmāni</div>
+                            <div class="word-translation">The Most Gracious</div>
+                        </div>
+                        
+                        <div class="word-card">
+                            <div class="word-arabic">الرَّحِيمِ</div>
+                            <div class="word-transliteration">r-Raḥīm</div>
+                            <div class="word-translation">The Most Merciful</div>
+                        </div>
+                        
+                        <div class="section-title">Practice Pronunciation</div>
+                        
+                        <div class="record-button">
+                            <div class="record-button-text">🎤</div>
+                            <div class="record-button-label">Tap to record your recitation</div>
+                        </div>
+                        
+                        <div class="feedback-card">
+                            <div class="feedback-title">AI Feedback</div>
+                            <div class="feedback-text">
+                                Your pronunciation of "الرَّحْمَٰنِ" is excellent! Try to extend the vowel sound in "الرَّحِيمِ" a bit longer.
+                            </div>
+                            <div class="feedback-button">Get Detailed Feedback</div>
+                        </div>
+                        
+                        <div class="navigation-controls">
+                            <div class="nav-button">Previous</div>
+                            <div class="nav-button">Next</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="implementation-notes">
+            <h3>Implementation Notes</h3>
+            <p>The Lesson screen implements a sophisticated learning interface with proper typography for Arabic text. The recording functionality uses React state to manage the recording status and show/hide the AI feedback. The card-based UI maintains consistency with the rest of the app while providing clear separation between different content sections.</p>
+        </div>
+    </div>
+    
+    <div class="screen-container">
+        <div class="screen-title">Navigation Implementation</div>
+        <div class="screen-description">
+            <p>The app uses React Navigation to handle navigation between screens, with a clean, modern transition animation.</p>
+            
+            <div class="code-section">
+                <div class="code-title">ModernApp.js</div>
+                <pre>
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import ModernWelcomeScreen from './src/screens/ModernWelcomeScreen';
+import ModernDashboardScreen from './src/screens/ModernDashboardScreen';
+import ModernLessonScreen from './src/screens/ModernLessonScreen';
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  return (
+    &lt;NavigationContainer&gt;
+      &lt;Stack.Navigator 
+        initialRouteName="Welcome"
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+        }}
+      &gt;
+        &lt;Stack.Screen name="Welcome" component={ModernWelcomeScreen} /&gt;
+        &lt;Stack.Screen name="Dashboard" component={ModernDashboardScreen} /&gt;
+        &lt;Stack.Screen name="Lesson" component={ModernLessonScreen} /&gt;
+      &lt;/Stack.Navigator&gt;
+    &lt;/NavigationContainer&gt;
+  );
+};
+
+export default App;
+                </pre>
+            </div>
+        </div>
+        
+        <div class="implementation-notes">
+            <h3>Implementation Notes</h3>
+            <p>The navigation system is implemented using React Navigation's Native Stack Navigator, which provides native-like transitions between screens. The header is hidden to allow for custom headers within each screen, giving more control over the design and layout. The animation is set to 'slide_from_right' for a smooth, intuitive transition that matches modern iOS and Android apps.</p>
+        </div>
+    </div>
+    
+    <div class="screen-container">
+        <div class="screen-title">Design System Implementation</div>
+        <div class="screen-description">
+            <p>A comprehensive design system ensures consistency across the app, with shared colors, typography, and spacing.</p>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Modern purple/blue primary colors (#5D5FEF) that convey innovation and technology</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Clean blue accent colors (#00C2FF) that suggest intelligence and trust</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Crisp white backgrounds with subtle light gray sections for improved readability</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Refined typography with better contrast for a more professional appearance</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Consistent spacing and layout principles across all screens</div>
+                </div>
+            </div>
+            
+            <div class="code-section">
+                <div class="code-title">modernDesignSystem.js</div>
+                <pre>
+export const designSystem = {
+  colors: {
+    primary: {
+      main: '#5D5FEF',
+      light: '#7B7DFF',
+      dark: '#4A4CD0',
+      gradient: ['#5D5FEF', '#6E70FF'],
+    },
+    secondary: {
+      main: '#00C2FF',
+      light: '#33CFFF',
+      dark: '#009BD0',
+    },
+    text: {
+      primary: '#333333',
+      secondary: '#666666',
+      tertiary: '#999999',
+      inverse: '#FFFFFF',
+    },
+    neutral: {
+      white: '#FFFFFF',
+      background: '#F8F9FA',
+      divider: '#EEEEEE',
+      outline: '#DDDDDD',
+    },
+    feedback: {
+      success: '#34C759',
+      warning: '#FF9500',
+      error: '#FF3B30',
+      info: '#007AFF',
+    },
+  },
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
+    xxl: 48,
+  },
+  borderRadius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+    xxl: 24,
+    round: 9999,
+  },
+  typography: {
+    fontFamily: {
+      base: 'System',
+      arabic: 'System',
+    },
+    fontSize: {
+      xs: 12,
+      sm: 14,
+      md: 16,
+      lg: 18,
+      xl: 20,
+      xxl: 24,
+      xxxl: 32,
+    },
+    fontWeight: {
+      regular: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
+    },
+  },
+  shadows: {
+    sm: {
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.05,
+      shadowRadius: 2,
+      elevation: 1,
+    },
+    md: {
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+    lg: {
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+  },
+};
+                </pre>
+            </div>
+        </div>
+        
+        <div class="implementation-notes">
+            <h3>Implementation Notes</h3>
+            <p>The design system is implemented as a JavaScript module that exports a comprehensive object containing all design tokens. This approach ensures consistency across the app and makes it easy to update the design in the future. The design system includes colors, spacing, border radius, typography, and shadows, all aligned with modern Apple and Uber design principles.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quranic Quest - Modern UI Design</title>
+    <style>
+        /* Base styles inspired by Apple and Uber design language */
+        :root {
+            /* Primary colors */
+            --primary-main: #5D5FEF;
+            --primary-light: #7B7DF7;
+            --primary-dark: #4A4CD6;
+            
+            /* Secondary colors */
+            --secondary-main: #00C2FF;
+            --secondary-light: #33CFFF;
+            --secondary-dark: #00A3D9;
+            
+            /* Neutral colors */
+            --neutral-white: #FFFFFF;
+            --neutral-background: #F5F7FA;
+            --neutral-card: #FFFFFF;
+            --neutral-border: #E5E9F0;
+            --neutral-divider: #F0F2F5;
+            
+            /* Text colors */
+            --text-primary: #1A1F36;
+            --text-secondary: #4F566B;
+            --text-tertiary: #8792A2;
+            --text-inverse: #FFFFFF;
+            
+            /* Feedback colors */
+            --success: #36B37E;
+            --warning: #FFAB00;
+            --error: #FF5630;
+            --info: #00B8D9;
+            
+            /* Spacing */
+            --spacing-xxs: 4px;
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* Border radius */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* Shadows */
+            --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.05), 0px 4px 6px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02);
+            --shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.05), 0px 10px 10px rgba(0, 0, 0, 0.02);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--neutral-background);
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-xl);
+            color: var(--primary-main);
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+        
+        .screen-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: var(--spacing-xxl);
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .screen-header {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--neutral-divider);
+        }
+        
+        .screen-title {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .screen-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .screen-content {
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-lg);
+        }
+        
+        .features-list {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .feature-icon {
+            color: var(--primary-main);
+            margin-right: var(--spacing-sm);
+            font-weight: bold;
+        }
+        
+        .feature-text {
+            color: var(--text-secondary);
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background-color: #000;
+            border-radius: 40px;
+            padding: 20px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-color: var(--neutral-background);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Welcome Screen Styles */
+        .welcome-screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #5D5FEF 0%, #7B7DF7 100%);
+            position: relative;
+        }
+        
+        .welcome-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-xl);
+            text-align: center;
+        }
+        
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .logo {
+            font-size: 60px;
+            font-weight: bold;
+            color: var(--text-inverse);
+        }
+        
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-inverse);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .welcome-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 280px;
+        }
+        
+        .welcome-actions {
+            width: 100%;
+            padding: var(--spacing-xl);
+        }
+        
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--text-inverse);
+            color: var(--primary-main);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-md);
+            text-decoration: none;
+        }
+        
+        .btn-text {
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: var(--text-inverse);
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        /* Dashboard Screen Styles */
+        .dashboard-screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--neutral-background);
+        }
+        
+        .status-bar {
+            height: 44px;
+            padding: 0 var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .time {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .status-icons {
+            display: flex;
+        }
+        
+        .status-icon {
+            margin-left: var(--spacing-xs);
+        }
+        
+        .header {
+            padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .greeting {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .dashboard-content {
+            flex: 1;
+            padding: 0 var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .stats-container {
+            display: flex;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            flex: 1;
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-right: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stat-card:last-child {
+            margin-right: 0;
+        }
+        
+        .stat-title {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            margin-right: var(--spacing-xs);
+            color: var(--primary-main);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+        }
+        
+        .lesson-card {
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .lesson-header {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .lesson-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-main) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-size: 20px;
+            margin-right: var(--spacing-md);
+        }
+        
+        .lesson-info {
+            flex: 1;
+        }
+        
+        .lesson-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .lesson-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .progress-container {
+            height: 4px;
+            background-color: var(--neutral-divider);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            border-radius: 2px;
+            width: 60%;
+        }
+        
+        .lesson-action {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            color: var(--text-inverse);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .practice-card {
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .practice-header {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .practice-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--secondary-main) 0%, var(--secondary-light) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-size: 20px;
+            margin-right: var(--spacing-md);
+        }
+        
+        .achievements-container {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .achievement-card {
+            flex: 0 0 auto;
+            width: 120px;
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-right: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .achievement-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-main) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-size: 20px;
+            margin: 0 auto var(--spacing-sm);
+        }
+        
+        .achievement-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .achievement-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        
+        .family-member {
+            display: flex;
+            align-items: center;
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .family-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-weight: 600;
+            margin-right: var(--spacing-md);
+        }
+        
+        .family-avatar.secondary {
+            background: linear-gradient(135deg, var(--secondary-main) 0%, var(--secondary-light) 100%);
+        }
+        
+        .family-info {
+            flex: 1;
+        }
+        
+        .family-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .family-progress-container {
+            height: 4px;
+            background-color: var(--neutral-divider);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .family-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            border-radius: 2px;
+        }
+        
+        .family-streak {
+            margin-left: var(--spacing-md);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tab-bar {
+            height: 83px;
+            background-color: var(--neutral-white);
+            border-top: 1px solid var(--neutral-divider);
+            display: flex;
+            padding-bottom: var(--spacing-md);
+        }
+        
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: var(--spacing-sm);
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: var(--spacing-xxs);
+            color: var(--text-tertiary);
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+        
+        .tab.active .tab-icon,
+        .tab.active .tab-label {
+            color: var(--primary-main);
+            font-weight: 600;
+        }
+        
+        /* Lesson Screen Styles */
+        .lesson-screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--neutral-background);
+        }
+        
+        .lesson-nav {
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--neutral-white);
+        }
+        
+        .back-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--neutral-background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            font-size: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .lesson-title-container {
+            text-align: center;
+        }
+        
+        .lesson-title-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .settings-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--neutral-background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            font-size: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .lesson-progress {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--neutral-white);
+        }
+        
+        .lesson-progress-container {
+            height: 4px;
+            background-color: var(--neutral-divider);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .lesson-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            border-radius: 2px;
+            width: 60%;
+        }
+        
+        .lesson-progress-text {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        
+        .lesson-content-scroll {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .verse-card {
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .arabic-text {
+            font-family: "Amiri", "Traditional Arabic", serif;
+            font-size: 32px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+            direction: rtl;
+        }
+        
+        .transliteration {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            font-style: italic;
+        }
+        
+        .translation {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .audio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .audio-button {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-size: 24px;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .audio-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .section-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .words-container {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .word-card {
+            flex: 0 0 auto;
+            width: 140px;
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-right: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .word-arabic {
+            font-family: "Amiri", "Traditional Arabic", serif;
+            font-size: 24px;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: var(--spacing-sm);
+            direction: rtl;
+        }
+        
+        .word-transliteration {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: var(--spacing-xxs);
+            font-style: italic;
+        }
+        
+        .word-translation {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        
+        .practice-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .record-button {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-inverse);
+            font-size: 24px;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .record-button.recording {
+            background: linear-gradient(135deg, var(--error) 0%, #FF7452 100%);
+        }
+        
+        .practice-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .feedback-card {
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .feedback-text {
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .feedback-button {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--neutral-white);
+            color: var(--primary-main);
+            border: 1px solid var(--primary-main);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .navigation-controls {
+            display: flex;
+            padding: var(--spacing-lg);
+            background-color: var(--neutral-white);
+            border-top: 1px solid var(--neutral-divider);
+        }
+        
+        .prev-button {
+            flex: 1;
+            padding: var(--spacing-md);
+            background-color: var(--neutral-white);
+            color: var(--primary-main);
+            border: 1px solid var(--primary-main);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            margin-right: var(--spacing-md);
+        }
+        
+        .next-button {
+            flex: 1;
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, var(--primary-main) 0%, var(--primary-light) 100%);
+            color: var(--text-inverse);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        @media (min-width: 768px) {
+            .screen-container {
+                flex-direction: row;
+            }
+            
+            .screen-content {
+                flex-direction: row;
+            }
+            
+            .screen-info {
+                flex: 1;
+                padding-right: var(--spacing-lg);
+            }
+            
+            .screen-preview {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quranic Quest - Modern UI Design</h1>
+        
+        <!-- Welcome Screen -->
+        <div class="screen-container">
+            <div class="screen-info">
+                <div class="screen-header">
+                    <h2 class="screen-title">Welcome Screen</h2>
+                    <p class="screen-subtitle">The entry point to the Quranic Quest app</p>
+                </div>
+                <div class="screen-content">
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Clean, minimalist design with gradient background</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Modern frosted glass logo container with subtle shadow</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Refined typography with proper spacing and hierarchy</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Elegant button design with subtle shadow effects</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Inspired by Apple's clean aesthetic and Uber's modern UI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-preview">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="welcome-screen">
+                            <div class="welcome-content">
+                                <div class="logo-container">
+                                    <div class="logo">Q</div>
+                                </div>
+                                <h1 class="welcome-title">Welcome to Quranic Quest</h1>
+                                <p class="welcome-subtitle">An interactive Quran learning experience for your family</p>
+                            </div>
+                            <div class="welcome-actions">
+                                <a href="#" class="btn-primary">Get Started</a>
+                                <a href="#" class="btn-text">Already have an account? Sign in</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Screen -->
+        <div class="screen-container">
+            <div class="screen-info">
+                <div class="screen-header">
+                    <h2 class="screen-title">Dashboard Screen</h2>
+                    <p class="screen-subtitle">The main hub of the app</p>
+                </div>
+                <div class="screen-content">
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Clean, airy layout with proper spacing between elements</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Card-based UI with subtle shadows and rounded corners</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Elegant stats display with gradient progress indicators</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Horizontal scrolling sections for achievements</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Modern tab bar with clear visual hierarchy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-preview">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="dashboard-screen">
+                            <div class="status-bar">
+                                <div class="time">9:41</div>
+                                <div class="status-icons">
+                                    <div class="status-icon">📶</div>
+                                    <div class="status-icon">🔋</div>
+                                </div>
+                            </div>
+                            
+                            <div class="header">
+                                <div class="greeting">Assalamu Alaikum, Ahmed</div>
+                                <div class="avatar">A</div>
+                            </div>
+                            
+                            <div class="dashboard-content">
+                                <div class="stats-container">
+                                    <div class="stat-card">
+                                        <div class="stat-title">Streak</div>
+                                        <div class="stat-value"><span class="stat-icon">🔥</span> 14</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-title">Today</div>
+                                        <div class="stat-value">11/15 min</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="section-title">Continue Learning</div>
+                                
+                                <div class="lesson-card">
+                                    <div class="lesson-header">
+                                        <div class="lesson-icon">📖</div>
+                                        <div class="lesson-info">
+                                            <div class="lesson-title">Continue Your Lesson</div>
+                                            <div class="lesson-subtitle">Surah Al-Fatiha: Verse 3</div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar"></div>
+                                    </div>
+                                    <a href="#" class="lesson-action">Continue</a>
+                                </div>
+                                
+                                <div class="practice-card">
+                                    <div class="practice-header">
+                                        <div class="practice-icon">🎤</div>
+                                        <div class="lesson-info">
+                                            <div class="lesson-title">Practice Pronunciation</div>
+                                            <div class="lesson-subtitle">10-minute interactive session</div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="lesson-action">Start Practice</a>
+                                </div>
+                                
+                                <div class="section-title">Recent Achievements</div>
+                                
+                                <div class="achievements-container">
+                                    <div class="achievement-card">
+                                        <div class="achievement-icon">⭐</div>
+                                        <div class="achievement-title">Perfect Pronunciation</div>
+                                        <div class="achievement-subtitle">Mastered 5 letters</div>
+                                    </div>
+                                    
+                                    <div class="achievement-card">
+                                        <div class="achievement-icon">📅</div>
+                                        <div class="achievement-title">7-Day Streak</div>
+                                        <div class="achievement-subtitle">Practiced every day</div>
+                                    </div>
+                                    
+                                    <div class="achievement-card">
+                                        <div class="achievement-icon">📚</div>
+                                        <div class="achievement-title">First Surah</div>
+                                        <div class="achievement-subtitle">Completed Al-Fatiha</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="section-title">Family Progress</div>
+                                
+                                <div class="family-member">
+                                    <div class="family-avatar">A</div>
+                                    <div class="family-info">
+                                        <div class="family-name">Ahmed</div>
+                                        <div class="family-progress-container">
+                                            <div class="family-progress-bar" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="family-streak">14 🔥</div>
+                                </div>
+                                
+                                <div class="family-member">
+                                    <div class="family-avatar secondary">F</div>
+                                    <div class="family-info">
+                                        <div class="family-name">Fatima</div>
+                                        <div class="family-progress-container">
+                                            <div class="family-progress-bar" style="width: 62%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="family-streak">8 🔥</div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-bar">
+                                <div class="tab active">
+                                    <div class="tab-icon">🏠</div>
+                                    <div class="tab-label">Home</div>
+                                </div>
+                                
+                                <div class="tab">
+                                    <div class="tab-icon">📚</div>
+                                    <div class="tab-label">Lessons</div>
+                                </div>
+                                
+                                <div class="tab">
+                                    <div class="tab-icon">🎤</div>
+                                    <div class="tab-label">Practice</div>
+                                </div>
+                                
+                                <div class="tab">
+                                    <div class="tab-icon">📊</div>
+                                    <div class="tab-label">Progress</div>
+                                </div>
+                                
+                                <div class="tab">
+                                    <div class="tab-icon">⚙️</div>
+                                    <div class="tab-label">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lesson Screen -->
+        <div class="screen-container">
+            <div class="screen-info">
+                <div class="screen-header">
+                    <h2 class="screen-title">Lesson Screen</h2>
+                    <p class="screen-subtitle">The interactive learning interface</p>
+                </div>
+                <div class="screen-content">
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Elegant verse display with proper typography for Arabic text</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Modern circular buttons with gradient backgrounds</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Clean card-based UI for word-by-word breakdown</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Intuitive recording interface with state changes</div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <div class="feature-text">Sophisticated navigation controls with proper visual hierarchy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="screen-preview">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="lesson-screen">
+                            <div class="status-bar">
+                                <div class="time">9:41</div>
+                                <div class="status-icons">
+                                    <div class="status-icon">📶</div>
+                                    <div class="status-icon">🔋</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-nav">
+                                <div class="back-button">←</div>
+                                <div class="lesson-title-container">
+                                    <div class="lesson-title-text">Surah Al-Fatiha</div>
+                                </div>
+                                <div class="settings-button">⚙️</div>
+                            </div>
+                            
+                            <div class="lesson-progress">
+                                <div class="lesson-progress-container">
+                                    <div class="lesson-progress-bar"></div>
+                                </div>
+                                <div class="lesson-progress-text">Verse 3 of 7</div>
+                            </div>
+                            
+                            <div class="lesson-content-scroll">
+                                <div class="verse-card">
+                                    <div class="arabic-text">الرَّحْمَٰنِ الرَّحِيمِ</div>
+                                    <div class="transliteration">Ar-Raḥmāni r-Raḥīm</div>
+                                    <div class="translation">The Most Gracious, the Most Merciful</div>
+                                </div>
+                                
+                                <div class="audio-container">
+                                    <div class="audio-button">▶️</div>
+                                    <div class="audio-text">Listen carefully, then practice reading aloud</div>
+                                </div>
+                                
+                                <div class="section-header">Word by Word</div>
+                                
+                                <div class="words-container">
+                                    <div class="word-card">
+                                        <div class="word-arabic">الرَّحْمَٰنِ</div>
+                                        <div class="word-transliteration">Ar-Raḥmāni</div>
+                                        <div class="word-translation">The Most Gracious</div>
+                                    </div>
+                                    
+                                    <div class="word-card">
+                                        <div class="word-arabic">الرَّحِيمِ</div>
+                                        <div class="word-transliteration">r-Raḥīm</div>
+                                        <div class="word-translation">The Most Merciful</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="section-header">Practice Pronunciation</div>
+                                
+                                <div class="practice-container">
+                                    <div class="record-button">🎤</div>
+                                    <div class="practice-text">Tap to record your recitation</div>
+                                </div>
+                                
+                                <div class="section-header">AI Feedback</div>
+                                
+                                <div class="feedback-card">
+                                    <div class="feedback-text">
+                                        Your pronunciation of "الرَّحْمَٰنِ" is excellent! Try to extend the vowel sound in "الرَّحِيمِ" a bit longer.
+                                    </div>
+                                    <a href="#" class="feedback-button">Get Detailed Feedback</a>
+                                </div>
+                            </div>
+                            
+                            <div class="navigation-controls">
+                                <button class="prev-button">Previous Verse</button>
+                                <button class="next-button">Next Verse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

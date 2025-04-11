@@ -1,0 +1,43 @@
+// Onboarding Screen 1: Welcome
+{
+  "screen": "Welcome",
+  "elements": {
+    "logo": {
+      "type": "image",
+      "position": "top-center",
+      "size": "large",
+      "content": "Quranic Quest Logo"
+    },
+    "title": {
+      "type": "text",
+      "position": "middle-center",
+      "style": "heading-1",
+      "content": "Welcome to Quranic Quest"
+    },
+    "subtitle": {
+      "type": "text",
+      "position": "below-title",
+      "style": "body-large",
+      "content": "An interactive Quran learning experience for your family"
+    },
+    "getStartedButton": {
+      "type": "button",
+      "position": "bottom",
+      "style": "primary",
+      "content": "Get Started",
+      "action": "navigate-to-onboarding-2"
+    },
+    "alreadyHaveAccountLink": {
+      "type": "link",
+      "position": "below-button",
+      "style": "text-link",
+      "content": "Already have an account? Sign in",
+      "action": "navigate-to-login"
+    }
+  },
+  "background": {
+    "type": "gradient",
+    "colors": ["#5D5FEF", "#4A4CD6"],
+    "direction": "top-to-bottom"
+  }
+}

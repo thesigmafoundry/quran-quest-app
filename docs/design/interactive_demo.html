@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quranic Quest App - Interactive Demo</title>
+    <style>
+        :root {
+            /* Primary colors */
+            --primary-main: #6A3DE8;
+            --primary-light: #8B66F0;
+            --primary-dark: #5429C9;
+            
+            /* Secondary colors */
+            --secondary-main: #00C2FF;
+            --secondary-light: #33CFFF;
+            --secondary-dark: #00A3D9;
+            
+            /* Neutral colors */
+            --neutral-white: #FFFFFF;
+            --neutral-background: #F5F7FA;
+            --neutral-card: #FFFFFF;
+            --neutral-border: #E5E9F0;
+            --neutral-divider: #F0F2F5;
+            
+            /* Text colors */
+            --text-primary: #1A1F36;
+            --text-secondary: #4F566B;
+            --text-tertiary: #8792A2;
+            --text-inverse: #FFFFFF;
+            
+            /* Feedback colors */
+            --success: #36B37E;
+            --warning: #FFAB00;
+            --error: #FF5630;
+            --info: #00B8D9;
+            
+            /* Spacing */
+            --spacing-xxs: 4px;
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* Border radius */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* Shadows */
+            --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.05), 0px 4px 6px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02);
+            --shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.05), 0px 10px 10px rgba(0, 0, 0, 0.02);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--neutral-background);
+            padding: 0;
+            margin: 0;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+        }
+        
+        .app-demo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .screen-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .screen-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+        
+        .nav-button {
+            background-color: var(--neutral-white);
+            border: 1px solid var(--neutral-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav-button:hover {
+            background-color: var(--neutral-background);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-button.active {
+            background-color: var(--primary-main);
+            color: white;
+            border-color: var(--primary-main);
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background-color: #000;
+            border-radius: 40px;
+            padding: 20px;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background-color: var(--neutral-background);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+        }
+        
+        .screen.active {
+            display: flex;
+        }
+        
+        .screen-info {
+            width: 375px;
+            background-color: var(--neutral-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .screen-title {
+            font-size: 1.5rem;
+            color: var(--primary-main);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .feature-list {
+            margin-top: var(--spacing-md);
+        }
+        
+        .feature-item {
+            display: flex;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .feature-icon {
+            color: var(--primary-main);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .demo-button {
+            background-color: var(--primary-main);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .demo-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .demo-button:disabled {
+            background-color: var(--neutral-border);
+            cursor: not-allowed;
+        }
+        
+        /* Welcome Screen */
+        .welcome-screen {
+            background: linear-gradient(135deg, #6A3DE8, #00C2FF);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            height: 100%;
+        }
+        
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .welcome-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .welcome-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .welcome-button {
+            background-color: white;
+            color: var(--primary-main);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: var(--spacing-lg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* User Type Selection Screen */
+        .user-type-screen {
+            background-color: white;
+            padding: var(--spacing-lg);
+            height: 100%;
+        }
+        
+        .screen-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .screen-heading {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .screen-subheading {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .user-type-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .user-type-card {
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .user-type-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .user-type-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(106, 61, 232, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-lg);
+        }
+        
+        .user-type-icon span {
+            font-size: 1.5rem;
+            color: var(--primary-main);
+        }
+        
+        .user-type-info {
+            flex: 1;
+        }
+        
+        .user-type-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .user-type-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Child Profile Setup Screen */
+        .child-profile-screen {
+            background-color: white;
+            padding: var(--spacing-lg);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-secondary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--neutral-border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            background-color: var(--neutral-background);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--neutral-border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            background-color: var(--neutral-background);
+        }
+        
+        .avatar-selection {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+        
+        .avatar-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--neutral-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .avatar-option.selected {
+            border-color: var(--primary-main);
+        }
+        
+        .avatar-option span {
+            font-size: 1.5rem;
+        }
+        
+        .form-actions {
+            margin-top: auto;
+            padding-top: var(--spacing-lg);
+        }
+        
+        .primary-button {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--primary-main);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Dashboard Screen */
+        .dashboard-screen {
+            background-color: var(--neutral-background);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dashboard-header {
+            padding: var(--spacing-lg);
+            background-color: white;
+            border-bottom: 1px solid var(--neutral-border);
+        }
+        
+        .user-greeting {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .user-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .dashboard-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .progress-summary {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .progress-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-main);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .lesson-section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .section-action {
+            font-size: 0.9rem;
+            color: var(--primary-main);
+            font-weight: 500;
+        }
+        
+        .lesson-cards {
+            display: flex;
+            gap: var(--spacing-md);
+            overflow-x: auto;
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        .lesson-card {
+            min-width: 200px;
+            background-color: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .lesson-image {
+            height: 100px;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .lesson-info {
+            padding: var(--spacing-md);
+        }
+        
+        .lesson-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .lesson-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .tab-bar {
+            display: flex;
+            background-color: white;
+            border-top: 1px solid var(--neutral-border);
+            padding: var(--spacing-xs) 0;
+        }
+        
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--spacing-sm);
+            color: var(--text-tertiary);
+        }
+        
+        .tab-item.active {
+            color: var(--primary-main);
+        }
+        
+        .tab-icon {
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .tab-label {
+            font-size: 0.7rem;
+        }
+        
+        /* Lesson Screen */
+        .lesson-screen {
+            background-color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .lesson-header {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--neutral-border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-button {
+            margin-right: var(--spacing-md);
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+        }
+        
+        .lesson-header-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .lesson-body {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .verse-container {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .verse-arabic {
+            font-size: 1.8rem;
+            line-height: 2.5;
+            text-align: right;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+            font-family: "Traditional Arabic", serif;
+        }
+        
+        .verse-translation {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .pronunciation-section {
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-heading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .audio-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .audio-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-main);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            border: none;
+        }
+        
+        .audio-progress {
+            flex: 1;
+            height: 4px;
+            background-color: var(--neutral-border);
+            border-radius: 2px;
+            margin-top: 23px;
+            position: relative;
+        }
+        
+        .audio-progress-fill {
+            position: absolute;
+            height: 100%;
+            width: 30%;
+            background-color: var(--primary-main);
+            border-radius: 2px;
+        }
+        
+        .recording-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .record-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--error);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+            border: none;
+        }
+        
+        .record-status {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .feedback-section {
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+        }
+        
+        .feedback-item {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--success);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: var(--spacing-sm);
+            flex-shrink: 0;
+        }
+        
+        .feedback-icon.warning {
+            background-color: var(--warning);
+        }
+        
+        .feedback-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .lesson-footer {
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--neutral-border);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer-button {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .button-secondary {
+            background-color: var(--neutral-background);
+            color: var(--text-secondary);
+            border: 1px solid var(--neutral-border);
+        }
+        
+        .button-primary {
+            background-color: var(--primary-main);
+            color: white;
+            border: none;
+        }
+        
+        /* Progress Tracking Screen */
+        .progress-screen {
+            background-color: var(--neutral-background);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .progress-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .progress-chart {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .chart-container {
+            height: 200px;
+            margin-top: var(--spacing-md);
+            position: relative;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            background-color: var(--primary-light);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        }
+        
+        .chart-bar:nth-child(1) {
+            left: 10%;
+            height: 60%;
+        }
+        
+        .chart-bar:nth-child(2) {
+            left: 25%;
+            height: 80%;
+        }
+        
+        .chart-bar:nth-child(3) {
+            left: 40%;
+            height: 40%;
+        }
+        
+        .chart-bar:nth-child(4) {
+            left: 55%;
+            height: 70%;
+        }
+        
+        .chart-bar:nth-child(5) {
+            left: 70%;
+            height: 90%;
+        }
+        
+        .chart-bar:nth-child(6) {
+            left: 85%;
+            height: 50%;
+        }
+        
+        .achievements-section {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .achievement-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--neutral-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+            color: var(--primary-main);
+        }
+        
+        .achievement-icon.locked {
+            color: var(--text-tertiary);
+        }
+        
+        .achievement-name {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .achievement-status {
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+        
+        .recent-activity {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .activity-list {
+            margin-top: var(--spacing-md);
+        }
+        
+        .activity-item {
+            display: flex;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--neutral-divider);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(106, 61, 232, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+            color: var(--primary-main);
+            font-size: 1.2rem;
+        }
+        
+        .activity-details {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .activity-meta {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Family Management Screen */
+        .family-screen {
+            background-color: var(--neutral-background);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .family-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .family-summary {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .family-members {
+            margin-top: var(--spacing-md);
+        }
+        
+        .member-card {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md);
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .member-info {
+            flex: 1;
+        }
+        
+        .member-name {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .member-stats {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .member-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .member-action {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--neutral-border);
+        }
+        
+        .add-member {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-md);
+            background-color: rgba(106, 61, 232, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--primary-main);
+            font-weight: 500;
+            margin-top: var(--spacing-md);
+        }
+        
+        .add-member-icon {
+            margin-right: var(--spacing-sm);
+            font-size: 1.2rem;
+        }
+        
+        .family-settings {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .settings-list {
+            margin-top: var(--spacing-md);
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--neutral-divider);
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-label {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        
+        .settings-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .settings-arrow {
+            margin-left: var(--spacing-sm);
+        }
+        
+        /* Subscription Screen */
+        .subscription-screen {
+            background-color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .subscription-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .trial-banner {
+            background: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            color: white;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .trial-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .trial-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .trial-button {
+            background-color: white;
+            color: var(--primary-main);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        
+        .plans-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .plan-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xs);
+        }
+        
+        .toggle-option {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+        }
+        
+        .toggle-option.active {
+            background-color: white;
+            color: var(--primary-main);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+        
+        .plan-card {
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 2px solid transparent;
+        }
+        
+        .plan-card.selected {
+            border-color: var(--primary-main);
+            background-color: rgba(106, 61, 232, 0.05);
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .plan-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .plan-price {
+            text-align: right;
+        }
+        
+        .price-amount {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-main);
+        }
+        
+        .price-period {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .plan-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .plan-features {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .plan-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+        }
+        
+        .feature-check {
+            color: var(--success);
+            margin-right: var(--spacing-sm);
+        }
+        
+        .subscription-footer {
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--neutral-border);
+        }
+        
+        .subscription-button {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--primary-main);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Payment Details Screen */
+        .payment-screen {
+            background-color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .payment-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .payment-summary {
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+        }
+        
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 1rem;
+            border-top: 1px solid var(--neutral-border);
+            padding-top: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .payment-methods {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md);
+            border: 1px solid var(--neutral-border);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary-main);
+            background-color: rgba(106, 61, 232, 0.05);
+        }
+        
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--neutral-background);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+        }
+        
+        .method-details {
+            flex: 1;
+        }
+        
+        .method-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .method-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .method-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--neutral-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .method-radio.selected {
+            border-color: var(--primary-main);
+        }
+        
+        .method-radio.selected::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-main);
+        }
+        
+        .card-form {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .form-column {
+            flex: 1;
+        }
+        
+        .terms-agreement {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .terms-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neutral-border);
+            border-radius: var(--radius-xs);
+            margin-right: var(--spacing-sm);
+            margin-top: 2px;
+            position: relative;
+        }
+        
+        .terms-checkbox.checked {
+            background-color: var(--primary-main);
+            border-color: var(--primary-main);
+        }
+        
+        .terms-checkbox.checked::after {
+            content: "✓";
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+        }
+        
+        .terms-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .terms-link {
+            color: var(--primary-main);
+            text-decoration: none;
+        }
+        
+        /* Settings Screen */
+        .settings-screen {
+            background-color: var(--neutral-background);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .settings-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+        
+        .settings-section {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+        }
+        
+        .settings-section-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--neutral-divider);
+        }
+        
+        .settings-option {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--neutral-divider);
+        }
+        
+        .settings-option:last-child {
+            border-bottom: none;
+        }
+        
+        .option-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(106, 61, 232, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+            color: var(--primary-main);
+            font-size: 1.2rem;
+        }
+        
+        .option-details {
+            flex: 1;
+        }
+        
+        .option-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .option-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .option-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-switch {
+            width: 40px;
+            height: 24px;
+            background-color: var(--neutral-border);
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .toggle-switch.active {
+            background-color: var(--primary-main);
+        }
+        
+        .toggle-switch::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s ease;
+        }
+        
+        .toggle-switch.active::after {
+            left: 18px;
+        }
+        
+        .logout-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+            color: var(--error);
+            font-weight: 500;
+        }
+        
+        .logout-icon {
+            margin-right: var(--spacing-sm);
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .screen-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            
+            .phone-frame {
+                margin-right: var(--spacing-xl);
+                margin-bottom: 0;
+            }
+            
+            .screen-info {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Quranic Quest App</h1>
+        <p>An AI-driven Quran learning app for Muslim families</p>
+    </header>
+    
+    <div class="container">
+        <div class="app-demo">
+            <div class="screen-nav">
+                <button class="nav-button active" data-screen="welcome">Welcome</button>
+                <button class="nav-button" data-screen="user-type">User Type</button>
+                <button class="nav-button" data-screen="child-profile">Child Profile</button>
+                <button class="nav-button" data-screen="dashboard">Dashboard</button>
+                <button class="nav-button" data-screen="lesson">Lesson</button>
+                <button class="nav-button" data-screen="progress">Progress</button>
+                <button class="nav-button" data-screen="family">Family</button>
+                <button class="nav-button" data-screen="subscription">Subscription</button>
+                <button class="nav-button" data-screen="payment">Payment</button>
+                <button class="nav-button" data-screen="settings">Settings</button>
+            </div>
+            
+            <div class="screen-container">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <!-- Welcome Screen -->
+                        <div class="screen welcome-screen active" id="welcome">
+                            <div class="app-logo">
+                                <span class="logo-text">QQ</span>
+                            </div>
+                            <h2 class="welcome-title">Quranic Quest</h2>
+                            <p class="welcome-subtitle">Begin your family's journey to Quranic fluency</p>
+                            <button class="welcome-button">Get Started</button>
+                        </div>
+                        
+                        <!-- User Type Selection Screen -->
+                        <div class="screen user-type-screen" id="user-type">
+                            <div class="screen-header">
+                                <h2 class="screen-heading">I am a...</h2>
+                                <p class="screen-subheading">Select your role to personalize your experience</p>
+                            </div>
+                            
+                            <div class="user-type-options">
+                                <div class="user-type-card">
+                                    <div class="user-type-icon">
+                                        <span>👨‍👩‍👧‍👦</span>
+                                    </div>
+                                    <div class="user-type-info">
+                                        <h3 class="user-type-title">Parent</h3>
+                                        <p class="user-type-description">Manage your children's Quranic learning journey</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="user-type-card">
+                                    <div class="user-type-icon">
+                                        <span>👨‍🏫</span>
+                                    </div>
+                                    <div class="user-type-info">
+                                        <h3 class="user-type-title">Teacher</h3>
+                                        <p class="user-type-description">Guide students in their Quranic education</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Child Profile Setup Screen -->
+                        <div class="screen child-profile-screen" id="child-profile">
+                            <div class="screen-header">
+                                <h2 class="screen-heading">Child Profile</h2>
+                                <p class="screen-subheading">Create a profile for your child</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Child's Name</label>
+                                <input type="text" class="form-input" placeholder="Enter name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Age</label>
+                                <select class="form-select">
+                                    <option>Select age</option>
+                                    <option>5-7 years</option>
+                                    <option>8-10 years</option>
+                                    <option>11-13 years</option>
+                                    <option>14+ years</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Experience Level</label>
+                                <select class="form-select">
+                                    <option>Select level</option>
+                                    <option>Beginner - No prior experience</option>
+                                    <option>Elementary - Knows some basics</option>
+                                    <option>Intermediate - Can read with assistance</option>
+                                    <option>Advanced - Can read independently</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Avatar</label>
+                                <div class="avatar-selection">
+                                    <div class="avatar-option selected">
+                                        <span>👦</span>
+                                    </div>
+                                    <div class="avatar-option">
+                                        <span>👧</span>
+                                    </div>
+                                    <div class="avatar-option">
+                                        <span>🧒</span>
+                                    </div>
+                                    <div class="avatar-option">
+                                        <span>👶</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button class="primary-button">Create Profile</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dashboard Screen -->
+                        <div class="screen dashboard-screen" id="dashboard">
+                            <div class="dashboard-header">
+                                <h2 class="user-greeting">Assalamu Alaikum, Ahmed!</h2>
+                                <p class="user-subtitle">Ready for today's lesson?</p>
+                            </div>
+                            
+                            <div class="dashboard-content">
+                                <div class="progress-summary">
+                                    <h3 class="progress-title">Weekly Progress</h3>
+                                    <div class="progress-stats">
+                                        <div class="stat-item">
+                                            <div class="stat-value">5</div>
+                                            <div class="stat-label">Days Streak</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value">7</div>
+                                            <div class="stat-label">Verses Learned</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value">85%</div>
+                                            <div class="stat-label">Accuracy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="lesson-section">
+                                    <div class="section-header">
+                                        <h3 class="section-title">Continue Learning</h3>
+                                        <span class="section-action">View All</span>
+                                    </div>
+                                    <div class="lesson-cards">
+                                        <div class="lesson-card">
+                                            <div class="lesson-image">Surah Al-Fatiha</div>
+                                            <div class="lesson-info">
+                                                <h4 class="lesson-title">Verse 3-4</h4>
+                                                <div class="lesson-meta">
+                                                    <span>5 min</span>
+                                                    <span>75% complete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-card">
+                                            <div class="lesson-image">Surah Al-Ikhlas</div>
+                                            <div class="lesson-info">
+                                                <h4 class="lesson-title">Verse 1-2</h4>
+                                                <div class="lesson-meta">
+                                                    <span>3 min</span>
+                                                    <span>New</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="lesson-section">
+                                    <div class="section-header">
+                                        <h3 class="section-title">Recommended for You</h3>
+                                        <span class="section-action">View All</span>
+                                    </div>
+                                    <div class="lesson-cards">
+                                        <div class="lesson-card">
+                                            <div class="lesson-image">Pronunciation</div>
+                                            <div class="lesson-info">
+                                                <h4 class="lesson-title">Qalqalah Sounds</h4>
+                                                <div class="lesson-meta">
+                                                    <span>10 min</span>
+                                                    <span>Beginner</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lesson-card">
+                                            <div class="lesson-image">Tajweed</div>
+                                            <div class="lesson-info">
+                                                <h4 class="lesson-title">Ghunnah Rules</h4>
+                                                <div class="lesson-meta">
+                                                    <span>8 min</span>
+                                                    <span>Intermediate</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-bar">
+                                <div class="tab-item active">
+                                    <div class="tab-icon">🏠</div>
+                                    <div class="tab-label">Home</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📚</div>
+                                    <div class="tab-label">Lessons</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📊</div>
+                                    <div class="tab-label">Progress</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">👨‍👩‍👧‍👦</div>
+                                    <div class="tab-label">Family</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">⚙️</div>
+                                    <div class="tab-label">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lesson Screen -->
+                        <div class="screen lesson-screen" id="lesson">
+                            <div class="lesson-header">
+                                <span class="back-button">←</span>
+                                <h2 class="lesson-header-title">Surah Al-Fatiha: Verse 3-4</h2>
+                            </div>
+                            
+                            <div class="lesson-body">
+                                <div class="verse-container">
+                                    <div class="verse-arabic">الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾</div>
+                                    <div class="verse-translation">The Most Gracious, the Most Merciful. Master of the Day of Judgment.</div>
+                                </div>
+                                
+                                <div class="pronunciation-section">
+                                    <h3 class="section-heading">Listen to Recitation</h3>
+                                    <div class="audio-controls">
+                                        <button class="audio-button">▶️</button>
+                                        <div class="audio-progress">
+                                            <div class="audio-progress-fill"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="recording-controls">
+                                        <button class="record-button">🎙️</button>
+                                        <div class="record-status">Tap to record your recitation</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="feedback-section">
+                                    <h3 class="section-heading">AI Pronunciation Feedback</h3>
+                                    <div class="feedback-item">
+                                        <div class="feedback-icon">✓</div>
+                                        <div class="feedback-text">Excellent pronunciation of "الرَّحْمَٰنِ" (Ar-Rahman)</div>
+                                    </div>
+                                    <div class="feedback-item">
+                                        <div class="feedback-icon warning">!</div>
+                                        <div class="feedback-text">Try to extend the "ī" sound in "الرَّحِيمِ" (Ar-Raheem) a bit longer</div>
+                                    </div>
+                                    <div class="feedback-item">
+                                        <div class="feedback-icon">✓</div>
+                                        <div class="feedback-text">Good pronunciation of "مَالِكِ" (Maliki)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-footer">
+                                <button class="footer-button button-secondary">Previous</button>
+                                <button class="footer-button button-primary">Next</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Tracking Screen -->
+                        <div class="screen progress-screen" id="progress">
+                            <div class="dashboard-header">
+                                <h2 class="user-greeting">Progress Tracking</h2>
+                                <p class="user-subtitle">Ahmed's learning journey</p>
+                            </div>
+                            
+                            <div class="progress-content">
+                                <div class="progress-chart">
+                                    <h3 class="progress-title">Daily Activity</h3>
+                                    <div class="chart-container">
+                                        <div class="chart-bar"></div>
+                                        <div class="chart-bar"></div>
+                                        <div class="chart-bar"></div>
+                                        <div class="chart-bar"></div>
+                                        <div class="chart-bar"></div>
+                                        <div class="chart-bar"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="achievements-section">
+                                    <h3 class="progress-title">Achievements</h3>
+                                    <div class="achievements-grid">
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">🔥</div>
+                                            <div class="achievement-name">5-Day Streak</div>
+                                            <div class="achievement-status">Earned</div>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">🎯</div>
+                                            <div class="achievement-name">Perfect Recitation</div>
+                                            <div class="achievement-status">Earned</div>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon locked">🏆</div>
+                                            <div class="achievement-name">Surah Master</div>
+                                            <div class="achievement-status">2/3 Complete</div>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon">📚</div>
+                                            <div class="achievement-name">First Lesson</div>
+                                            <div class="achievement-status">Earned</div>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon locked">⭐</div>
+                                            <div class="achievement-name">Tajweed Expert</div>
+                                            <div class="achievement-status">1/5 Complete</div>
+                                        </div>
+                                        <div class="achievement-item">
+                                            <div class="achievement-icon locked">🌙</div>
+                                            <div class="achievement-name">Night Learner</div>
+                                            <div class="achievement-status">Locked</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="recent-activity">
+                                    <h3 class="progress-title">Recent Activity</h3>
+                                    <div class="activity-list">
+                                        <div class="activity-item">
+                                            <div class="activity-icon">📖</div>
+                                            <div class="activity-details">
+                                                <div class="activity-title">Completed Surah Al-Fatiha Verse 3-4</div>
+                                                <div class="activity-meta">
+                                                    <span>85% accuracy</span>
+                                                    <span>Today, 10:30 AM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-icon">🎯</div>
+                                            <div class="activity-details">
+                                                <div class="activity-title">Earned Perfect Recitation badge</div>
+                                                <div class="activity-meta">
+                                                    <span>100% accuracy</span>
+                                                    <span>Yesterday, 4:15 PM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-icon">📚</div>
+                                            <div class="activity-details">
+                                                <div class="activity-title">Practiced Qalqalah sounds</div>
+                                                <div class="activity-meta">
+                                                    <span>10 minutes</span>
+                                                    <span>Yesterday, 2:45 PM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-bar">
+                                <div class="tab-item">
+                                    <div class="tab-icon">🏠</div>
+                                    <div class="tab-label">Home</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📚</div>
+                                    <div class="tab-label">Lessons</div>
+                                </div>
+                                <div class="tab-item active">
+                                    <div class="tab-icon">📊</div>
+                                    <div class="tab-label">Progress</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">👨‍👩‍👧‍👦</div>
+                                    <div class="tab-label">Family</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">⚙️</div>
+                                    <div class="tab-label">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Family Management Screen -->
+                        <div class="screen family-screen" id="family">
+                            <div class="dashboard-header">
+                                <h2 class="user-greeting">Family Management</h2>
+                                <p class="user-subtitle">Manage your family's learning</p>
+                            </div>
+                            
+                            <div class="family-content">
+                                <div class="family-summary">
+                                    <h3 class="progress-title">Family Members</h3>
+                                    <div class="family-members">
+                                        <div class="member-card">
+                                            <div class="member-avatar">A</div>
+                                            <div class="member-info">
+                                                <div class="member-name">Ahmed</div>
+                                                <div class="member-stats">5-day streak • 7 verses learned</div>
+                                            </div>
+                                            <div class="member-actions">
+                                                <div class="member-action">📊</div>
+                                                <div class="member-action">⚙️</div>
+                                            </div>
+                                        </div>
+                                        <div class="member-card">
+                                            <div class="member-avatar">S</div>
+                                            <div class="member-info">
+                                                <div class="member-name">Sara</div>
+                                                <div class="member-stats">3-day streak • 4 verses learned</div>
+                                            </div>
+                                            <div class="member-actions">
+                                                <div class="member-action">📊</div>
+                                                <div class="member-action">⚙️</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="add-member">
+                                        <span class="add-member-icon">+</span>
+                                        <span>Add Family Member</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="family-settings">
+                                    <h3 class="progress-title">Family Settings</h3>
+                                    <div class="settings-list">
+                                        <div class="settings-item">
+                                            <div class="settings-label">Learning Schedule</div>
+                                            <div class="settings-value">
+                                                Daily, 4:00 PM
+                                                <span class="settings-arrow">›</span>
+                                            </div>
+                                        </div>
+                                        <div class="settings-item">
+                                            <div class="settings-label">Progress Reports</div>
+                                            <div class="settings-value">
+                                                Weekly
+                                                <span class="settings-arrow">›</span>
+                                            </div>
+                                        </div>
+                                        <div class="settings-item">
+                                            <div class="settings-label">Content Restrictions</div>
+                                            <div class="settings-value">
+                                                Age-appropriate
+                                                <span class="settings-arrow">›</span>
+                                            </div>
+                                        </div>
+                                        <div class="settings-item">
+                                            <div class="settings-label">Family Goals</div>
+                                            <div class="settings-value">
+                                                Set goals
+                                                <span class="settings-arrow">›</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-bar">
+                                <div class="tab-item">
+                                    <div class="tab-icon">🏠</div>
+                                    <div class="tab-label">Home</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📚</div>
+                                    <div class="tab-label">Lessons</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📊</div>
+                                    <div class="tab-label">Progress</div>
+                                </div>
+                                <div class="tab-item active">
+                                    <div class="tab-icon">👨‍👩‍👧‍👦</div>
+                                    <div class="tab-label">Family</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">⚙️</div>
+                                    <div class="tab-label">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Subscription Screen -->
+                        <div class="screen subscription-screen" id="subscription">
+                            <div class="lesson-header">
+                                <span class="back-button">←</span>
+                                <h2 class="lesson-header-title">Subscription Plans</h2>
+                            </div>
+                            
+                            <div class="subscription-content">
+                                <div class="trial-banner">
+                                    <div class="trial-title">14-Day Free Trial</div>
+                                    <div class="trial-description">Try all premium features for free. No payment required during trial period.</div>
+                                    <button class="trial-button">Start Free Trial</button>
+                                </div>
+                                
+                                <div class="plans-section">
+                                    <div class="plan-toggle">
+                                        <div class="toggle-option active">Monthly</div>
+                                        <div class="toggle-option">Annual</div>
+                                    </div>
+                                    
+                                    <div class="plans-grid">
+                                        <div class="plan-card">
+                                            <div class="plan-header">
+                                                <div>
+                                                    <div class="plan-name">Basic</div>
+                                                    <div class="plan-description">Essential Quranic learning features</div>
+                                                </div>
+                                                <div class="plan-price">
+                                                    <div class="price-amount">$4.99</div>
+                                                    <div class="price-period">per month</div>
+                                                </div>
+                                            </div>
+                                            <div class="plan-features">
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Basic pronunciation feedback</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>1 child profile</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Progress tracking</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="plan-card selected">
+                                            <div class="plan-header">
+                                                <div>
+                                                    <div class="plan-name">Premium</div>
+                                                    <div class="plan-description">Advanced features with personalized learning</div>
+                                                </div>
+                                                <div class="plan-price">
+                                                    <div class="price-amount">$9.99</div>
+                                                    <div class="price-period">per month</div>
+                                                </div>
+                                            </div>
+                                            <div class="plan-features">
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Advanced AI pronunciation feedback</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Personalized learning paths</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>1 child profile</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Detailed progress analytics</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Offline learning</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="plan-card">
+                                            <div class="plan-header">
+                                                <div>
+                                                    <div class="plan-name">Family</div>
+                                                    <div class="plan-description">Premium features for the whole family</div>
+                                                </div>
+                                                <div class="plan-price">
+                                                    <div class="price-amount">$14.99</div>
+                                                    <div class="price-period">per month</div>
+                                                </div>
+                                            </div>
+                                            <div class="plan-features">
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>All Premium features</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Up to 5 child profiles</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Family progress dashboard</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Family goals and challenges</span>
+                                                </div>
+                                                <div class="plan-feature">
+                                                    <span class="feature-check">✓</span>
+                                                    <span>Priority support</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="subscription-footer">
+                                <button class="subscription-button">Continue with Premium</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Details Screen -->
+                        <div class="screen payment-screen" id="payment">
+                            <div class="lesson-header">
+                                <span class="back-button">←</span>
+                                <h2 class="lesson-header-title">Payment Details</h2>
+                            </div>
+                            
+                            <div class="payment-content">
+                                <div class="payment-summary">
+                                    <h3 class="progress-title">Order Summary</h3>
+                                    <div class="summary-row">
+                                        <div>Premium Plan (Monthly)</div>
+                                        <div>$9.99</div>
+                                    </div>
+                                    <div class="summary-row">
+                                        <div>14-Day Free Trial</div>
+                                        <div>-$9.99</div>
+                                    </div>
+                                    <div class="summary-row total">
+                                        <div>Total Due Today</div>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-methods">
+                                    <h3 class="progress-title">Payment Method</h3>
+                                    <div class="payment-method selected">
+                                        <div class="method-icon">💳</div>
+                                        <div class="method-details">
+                                            <div class="method-name">Credit/Debit Card</div>
+                                            <div class="method-description">Pay with Visa, Mastercard, etc.</div>
+                                        </div>
+                                        <div class="method-radio selected"></div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="method-icon">P</div>
+                                        <div class="method-details">
+                                            <div class="method-name">PayPal</div>
+                                            <div class="method-description">Pay with your PayPal account</div>
+                                        </div>
+                                        <div class="method-radio"></div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="method-icon">A</div>
+                                        <div class="method-details">
+                                            <div class="method-name">Apple Pay</div>
+                                            <div class="method-description">Quick and secure payment</div>
+                                        </div>
+                                        <div class="method-radio"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-form">
+                                    <div class="form-group">
+                                        <label class="form-label">Card Number</label>
+                                        <input type="text" class="form-input" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-column">
+                                            <label class="form-label">Expiry Date</label>
+                                            <input type="text" class="form-input" placeholder="MM/YY">
+                                        </div>
+                                        <div class="form-column">
+                                            <label class="form-label">CVC</label>
+                                            <input type="text" class="form-input" placeholder="123">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Cardholder Name</label>
+                                        <input type="text" class="form-input" placeholder="John Smith">
+                                    </div>
+                                </div>
+                                
+                                <div class="terms-agreement">
+                                    <div class="terms-checkbox checked"></div>
+                                    <div class="terms-text">
+                                        I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>. My subscription will automatically renew after the 14-day free trial at the rate of $9.99/month until canceled.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="subscription-footer">
+                                <button class="subscription-button">Start Free Trial</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Screen -->
+                        <div class="screen settings-screen" id="settings">
+                            <div class="dashboard-header">
+                                <h2 class="user-greeting">Settings</h2>
+                                <p class="user-subtitle">Customize your experience</p>
+                            </div>
+                            
+                            <div class="settings-content">
+                                <div class="settings-section">
+                                    <div class="settings-section-title">Account</div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">👤</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Profile</div>
+                                            <div class="option-description">Manage your account information</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">🔒</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Security</div>
+                                            <div class="option-description">Password and authentication</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">💳</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Subscription</div>
+                                            <div class="option-description">Manage your plan and billing</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="settings-section">
+                                    <div class="settings-section-title">Preferences</div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">🔔</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Notifications</div>
+                                            <div class="option-description">Manage alerts and reminders</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">🌙</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Dark Mode</div>
+                                            <div class="option-description">Change app appearance</div>
+                                        </div>
+                                        <div class="option-control">
+                                            <div class="toggle-switch"></div>
+                                        </div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">🔊</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Sound</div>
+                                            <div class="option-description">App sounds and volume</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">🌐</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Language</div>
+                                            <div class="option-description">App language and translations</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="settings-section">
+                                    <div class="settings-section-title">Support</div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">❓</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Help Center</div>
+                                            <div class="option-description">FAQs and tutorials</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">📞</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Contact Us</div>
+                                            <div class="option-description">Get support from our team</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                    <div class="settings-option">
+                                        <div class="option-icon">📝</div>
+                                        <div class="option-details">
+                                            <div class="option-name">Feedback</div>
+                                            <div class="option-description">Share your thoughts</div>
+                                        </div>
+                                        <div class="option-control">›</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="logout-button">
+                                    <span class="logout-icon">🚪</span>
+                                    <span>Log Out</span>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-bar">
+                                <div class="tab-item">
+                                    <div class="tab-icon">🏠</div>
+                                    <div class="tab-label">Home</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📚</div>
+                                    <div class="tab-label">Lessons</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">📊</div>
+                                    <div class="tab-label">Progress</div>
+                                </div>
+                                <div class="tab-item">
+                                    <div class="tab-icon">👨‍👩‍👧‍👦</div>
+                                    <div class="tab-label">Family</div>
+                                </div>
+                                <div class="tab-item active">
+                                    <div class="tab-icon">⚙️</div>
+                                    <div class="tab-label">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="screen-info">
+                    <h3 class="screen-title">Welcome Screen</h3>
+                    <p>The welcome screen introduces users to the Quranic Quest app with a beautiful gradient background and frosted glass effect for the logo container.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Modern gradient background with soothing colors</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Frosted glass effect for the logo container</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Clear call-to-action button</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Welcoming introduction to the app's purpose</span>
+                        </div>
+                    </div>
+                    
+                    <div class="button-container">
+                        <button class="demo-button" id="prev-screen" disabled>Previous Screen</button>
+                        <button class="demo-button" id="next-screen">Next Screen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const screens = [
+                {
+                    id: 'welcome',
+                    title: 'Welcome Screen',
+                    description: 'The welcome screen introduces users to the Quranic Quest app with a beautiful gradient background and frosted glass effect for the logo container.',
+                    features: [
+                        'Modern gradient background with soothing colors',
+                        'Frosted glass effect for the logo container',
+                        'Clear call-to-action button',
+                        'Welcoming introduction to the app\'s purpose'
+                    ]
+                },
+                {
+                    id: 'user-type',
+                    title: 'User Type Selection Screen',
+                    description: 'This screen allows users to select their role as either a parent or teacher to personalize their experience.',
+                    features: [
+                        'Clear role options with descriptive text',
+                        'Visual icons to represent each user type',
+                        'Card-based UI with subtle hover effects',
+                        'Simple and intuitive navigation'
+                    ]
+                },
+                {
+                    id: 'child-profile',
+                    title: 'Child Profile Setup Screen',
+                    description: 'Parents can create profiles for their children with personalized information to customize the learning experience.',
+                    features: [
+                        'Form fields for child\'s name, age, and experience level',
+                        'Fun avatar selection options',
+                        'Clean form layout with proper spacing',
+                        'Clear action button to proceed'
+                    ]
+                },
+                {
+                    id: 'dashboard',
+                    title: 'Dashboard Screen',
+                    description: 'The main dashboard provides an overview of the child\'s progress and quick access to lessons and activities.',
+                    features: [
+                        'Personalized greeting with Islamic salutation',
+                        'Progress summary with key metrics',
+                        'Continue learning section with current lessons',
+                        'Recommended content based on learning progress',
+                        'Tab bar navigation for easy access to main sections'
+                    ]
+                },
+                {
+                    id: 'lesson',
+                    title: 'Lesson Screen',
+                    description: 'The lesson screen provides an interactive learning experience with Quranic verses, audio playback, and AI pronunciation feedback.',
+                    features: [
+                        'Clear display of Arabic text with proper typography',
+                        'English translation for understanding',
+                        'Audio playback controls for listening to correct recitation',
+                        'Recording functionality for practice',
+                        'AI-powered pronunciation feedback with specific suggestions'
+                    ]
+                },
+                {
+                    id: 'progress',
+                    title: 'Progress Tracking Screen',
+                    description: 'This screen allows parents and children to track learning progress, achievements, and recent activity.',
+                    features: [
+                        'Visual chart showing daily activity',
+                        'Achievement badges to gamify the learning experience',
+                        'Detailed recent activity log',
+                        'Clear metrics on verses learned and accuracy'
+                    ]
+                },
+                {
+                    id: 'family',
+                    title: 'Family Management Screen',
+                    description: 'Parents can manage multiple child profiles and family-wide settings from this screen.',
+                    features: [
+                        'Overview of all family members and their progress',
+                        'Quick actions for each child profile',
+                        'Option to add new family members',
+                        'Family-wide settings like learning schedules and content restrictions'
+                    ]
+                },
+                {
+                    id: 'subscription',
+                    title: 'Subscription Screen',
+                    description: 'Users can select from different subscription plans after their 14-day free trial.',
+                    features: [
+                        'Free trial promotion banner',
+                        'Toggle between monthly and annual billing',
+                        'Clear presentation of different plan tiers',
+                        'Feature comparison between plans',
+                        'Pricing information with savings for annual plans'
+                    ]
+                },
+                {
+                    id: 'payment',
+                    title: 'Payment Details Screen',
+                    description: 'Secure payment processing screen for entering payment information.',
+                    features: [
+                        'Order summary with trial discount applied',
+                        'Multiple payment method options',
+                        'Secure card information form',
+                        'Clear terms and conditions with checkbox confirmation',
+                        'Prominent call-to-action button'
+                    ]
+                },
+                {
+                    id: 'settings',
+                    title: 'Settings Screen',
+                    description: 'Users can customize their app experience and manage account settings.',
+                    features: [
+                        'Organized sections for account, preferences, and support',
+                        'Toggle switches for binary options',
+                        'Clear navigation to sub-sections',
+                        'Logout option for account security'
+                    ]
+                }
+            ];
+            
+            let currentScreenIndex = 0;
+            const navButtons = document.querySelectorAll('.nav-button');
+            const screenElements = document.querySelectorAll('.screen');
+            const screenTitle = document.querySelector('.screen-title');
+            const screenDescription = document.querySelector('.screen-info p');
+            const featureList = document.querySelector('.feature-list');
+            const prevButton = document.getElementById('prev-screen');
+            const nextButton = document.getElementById('next-screen');
+            
+            function updateScreenInfo() {
+                const currentScreen = screens[currentScreenIndex];
+                screenTitle.textContent = currentScreen.title;
+                screenDescription.textContent = currentScreen.description;
+                
+                // Update features
+                featureList.innerHTML = '';
+                currentScreen.features.forEach(feature => {
+                    const featureItem = document.createElement('div');
+                    featureItem.className = 'feature-item';
+                    featureItem.innerHTML = `
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">${feature}</span>
+                    `;
+                    featureList.appendChild(featureItem);
+                });
+                
+                // Update navigation buttons
+                prevButton.disabled = currentScreenIndex === 0;
+                nextButton.disabled = currentScreenIndex === screens.length - 1;
+                
+                // Update active nav button
+                navButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                navButtons[currentScreenIndex].classList.add('active');
+                
+                // Update active screen
+                screenElements.forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                document.getElementById(currentScreen.id).classList.add('active');
+            }
+            
+            // Initialize nav buttons
+            navButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    currentScreenIndex = index;
+                    updateScreenInfo();
+                });
+            });
+            
+            // Initialize prev/next buttons
+            prevButton.addEventListener('click', () => {
+                if (currentScreenIndex > 0) {
+                    currentScreenIndex--;
+                    updateScreenInfo();
+                }
+            });
+            
+            nextButton.addEventListener('click', () => {
+                if (currentScreenIndex < screens.length - 1) {
+                    currentScreenIndex++;
+                    updateScreenInfo();
+                }
+            });
+            
+            // Initialize with first screen
+            updateScreenInfo();
+        });
+    </script>
+</body>
+</html>

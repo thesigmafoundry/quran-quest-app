@@ -1,0 +1,69 @@
+// Onboarding Screen 2: User Type Selection
+{
+  "screen": "UserTypeSelection",
+  "elements": {
+    "header": {
+      "type": "text",
+      "position": "top",
+      "style": "heading-2",
+      "content": "Who will be using Quranic Quest?"
+    },
+    "subtitle": {
+      "type": "text",
+      "position": "below-header",
+      "style": "body-medium",
+      "content": "Select your role to personalize your experience"
+    },
+    "optionParent": {
+      "type": "card",
+      "position": "middle-top",
+      "style": "selection-card",
+      "content": {
+        "icon": "parent-icon",
+        "title": "Parent",
+        "description": "Manage your children's learning journey"
+      },
+      "action": "select-parent-role"
+    },
+    "optionChild": {
+      "type": "card",
+      "position": "middle-bottom",
+      "style": "selection-card",
+      "content": {
+        "icon": "child-icon",
+        "title": "Child",
+        "description": "Learn Quran with interactive lessons"
+      },
+      "action": "select-child-role"
+    },
+    "optionFamily": {
+      "type": "card",
+      "position": "below-options",
+      "style": "selection-card",
+      "content": {
+        "icon": "family-icon",
+        "title": "Family",
+        "description": "Set up accounts for the whole family"
+      },
+      "action": "select-family-role"
+    },
+    "continueButton": {
+      "type": "button",
+      "position": "bottom",
+      "style": "primary",
+      "content": "Continue",
+      "action": "navigate-to-next-onboarding-step"
+    },
+    "backButton": {
+      "type": "button",
+      "position": "bottom-left",
+      "style": "text-only",
+      "content": "Back",
+      "action": "navigate-to-previous-screen"
+    }
+  },
+  "background": {
+    "type": "solid",
+    "color": "#FFFFFF"
+  }
+}
